@@ -5,7 +5,7 @@ class Database():
     def __init__(self, args={}):
       self.api_key = args['api_key']
       self.database_id = str(args['database_id'])
-      self.base_url = 'https://www.devicemagic.com/api/forms/{0}/device_magic_database.json'.format(args['database_id'])
+      self.base_url = 'https://www.devicemagic.com/api/forms/{0}/device_magic_database.json'.format(self.database_id)
 
     def simple_request(self):
         request = requests.get(self.base_url, auth=(self.api_key, 'pass')) # For all submissions within the Device Magic Database
