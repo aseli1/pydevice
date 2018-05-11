@@ -4,11 +4,11 @@ import base64
 class Resource():
 
     def __init__(self, args={}):
-      self.api_key = args['api_key']
-      self.resource_id = args.get('resource_id')
-      self.file_path = args['file_path']
-      self.base_url = 'https://www.devicemagic.com/api/resources'
-      self.content_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        self.api_key = args['api_key']
+        self.resource_id = args.get('resource_id')
+        self.file_path = args['file_path']
+        self.base_url = 'https://www.devicemagic.com/api/resources'
+        self.content_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
 
     def all_resources(self):
         request = requests.get(self.base_url + ".json", auth=(self.api_key, 'pass')) # To get an overview of all the resources
