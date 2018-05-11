@@ -41,7 +41,7 @@ class Form():
 
     def update_form_group(self, form_id, json):
         headers = {'Content-Type': 'application/json'}
-        request = requests.put(self.base_url + "/" + str(form_id) + "/properties", auth=(self.api_key, 'pass'), data=json, headers=headers)
+        request = requests.post(self.base_url + "/" + str(form_id) + "/properties", auth=(self.api_key, 'pass'), data=json, headers=headers)
         if request.status_code == 200:
             return "Form group updated"
         else:
