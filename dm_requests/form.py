@@ -16,17 +16,17 @@ class Form():
         request = requests.get(self.base_url + "/"+ str(form_id) + ".json", auth=(self.api_key, 'pass'))
         return request.text
 
-    def create_form(self, form_json):
+    def create_form(json):
         headers = {'Content-Type': 'application/json'}    
-        request = requests.post(self.base_url, auth=(self.api_key, 'pass'), data=form_json, headers=headers)
+        request = requests.post(dm_base_url, auth=(api_key, 'pass'), data=json, headers=headers)
         if request.status_code == 201:
             return "Form created"
         else:
             return "Failed with status code: {0}".format(request.status_code)
 
-    def update_form(self, form_id, form_json):
+    def update_form(form_id, json):
         headers = {'Content-Type': 'application/json'}
-        request = requests.put(self.base_url + "/" + str(form_id), auth=(self.api_key, 'pass'), data=form_json, headers=headers)
+        request = requests.put(dm_base_url + "/" + str(form_id), auth=(api_key, 'pass'), data=json, headers=headers)
         if request.status_code == 202:
             return "Form updated"
         else:
