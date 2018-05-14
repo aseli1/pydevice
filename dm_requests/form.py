@@ -10,11 +10,11 @@ class Form():
 
     def all_forms(self):
         request = requests.get(self.base_url + ".json", auth=(self.api_key, 'pass'))
-        return request.text
+        return request.json
 
     def form_details(self, form_id):
         request = requests.get(self.base_url + "/"+ str(form_id) + ".json", auth=(self.api_key, 'pass'))
-        return request.text
+        return request.json
 
     def create_form(json):
         headers = {'Content-Type': 'application/json'}    
