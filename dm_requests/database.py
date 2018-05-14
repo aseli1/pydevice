@@ -9,7 +9,7 @@ class Database():
 
     def simple_request(self):
         request = requests.get(self.base_url, auth=(self.api_key, 'pass')) # For all submissions within the Device Magic Database
-        return request
+        return request.json
 
     def join_params(self, parameters):
         params = [ param.strip() for param in parameters ]
@@ -19,7 +19,7 @@ class Database():
     def request_with_params(self, parameters):
         params = self.join_params(parameters)
         request = requests.get(self.base_url + params, auth=(self.api_key, 'pass'))
-        return request
+        return request.json
 
     def db_request(self, *args):
         return self.request_with_params(args) if args else self.simple_request()
