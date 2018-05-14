@@ -6,13 +6,13 @@ class Resource():
     def __init__(self, args={}):
         self.api_key = args['api_key']
         self.resource_id = args.get('resource_id')
-        self.file_path = args['file_path']
+        self.file_path = args.get('file_path')
         self.base_url = 'https://www.devicemagic.com/api/resources'
         self.content_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
 
     def all_resources(self):
         request = requests.get(self.base_url + ".json", auth=(self.api_key, 'pass')) # To get an overview of all the resources
-        return request
+        return request.json
 
     def resource_download(self):
         resource_file = requests.get(self.base_url + "/" + self.resource_id, auth=(self.api_key, 'pass'))
@@ -20,7 +20,7 @@ class Resource():
 
     def resource_details(self):
         request = requests.get(self.base_url + "/"+ self.resource_id + "/describe.json", auth=(self.api_key, 'pass'))
-        return request
+        return request.json
 
     def encode_file(self):
         with open(self.file_path, "rb") as resource_file:
