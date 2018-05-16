@@ -5,7 +5,7 @@ class Resource():
 
     def __init__(self, args={}):
         self.api_key = args['api_key']
-        self.resource_id = args.get('resource_id')
+        self.resource_id = str(args.get('resource_id'))
         self.file_path = args.get('file_path')
         self.base_url = 'https://www.devicemagic.com/api/resources'
         self.content_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
