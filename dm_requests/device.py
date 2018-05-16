@@ -11,19 +11,19 @@ class Device():
         request = requests.get(self.base_url + ".xml", auth=(self.api_key, 'pass'))
         return request.text
 
-    def device_details(self):
-        request = requests.get(self.base_url + "/"+ str(self.device_id) + ".xml", auth=(self.api_key, 'pass'))
+    def device_details(self, device_id):
+        request = requests.get(self.base_url + "/"+ str(device_id) + ".xml", auth=(self.api_key, 'pass'))
         return request.text
 
-    def approve_device(self):
-        request = requests.post(self.base_url + "/"+ str(self.device_id) + "/approve", auth=(self.api_key, 'pass'))
+    def approve_device(self, device_id):
+        request = requests.post(self.base_url + "/"+ str(device_id) + "/approve", auth=(self.api_key, 'pass'))
         return request.text
 
-    def delete_device(self):
-        request = requests.delete(self.base_url + "/" + str(self.device_id), auth=(self.api_key, 'pass'))
+    def delete_device(self, device_id):
+        request = requests.delete(self.base_url + "/" + str(device_id), auth=(self.api_key, 'pass'))
         return request.text
 
-    def update_device(self, xml):
+    def update_device(self, device_id, xml):
         headers = {'Content-Type': 'application/xml'}
-        request = requests.put(self.base_url + "/" + str(self.device_id), auth=(self.api_key, 'pass'), data=xml, headers=headers)
+        request = requests.put(self.base_url + "/" + str(device_id), auth=(self.api_key, 'pass'), data=xml, headers=headers)
         return request.text
