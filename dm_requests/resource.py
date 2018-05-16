@@ -12,7 +12,7 @@ class Resource():
 
     def all_resources(self):
         request = requests.get(self.base_url + ".json", auth=(self.api_key, 'pass')) # To get an overview of all the resources
-        return request.json
+        return request.json()
 
     def resource_download(self):
         resource_file = requests.get(self.base_url + "/" + self.resource_id, auth=(self.api_key, 'pass'))
@@ -20,7 +20,7 @@ class Resource():
 
     def resource_details(self):
         request = requests.get(self.base_url + "/"+ self.resource_id + "/describe.json", auth=(self.api_key, 'pass'))
-        return request.json
+        return request.json()
 
     def encode_file(self):
         with open(self.file_path, "rb") as resource_file:
