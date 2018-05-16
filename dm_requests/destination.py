@@ -23,7 +23,7 @@ class Destination():
             url = self.base_url
         headers = {'Content-Type': 'application/json'}    
         request = requests.post(url, auth=(self.api_key, 'pass'), data=json, headers=headers)
-        if request.status_code == 201:
+        if request.status_code >= 200 and request.status_code < 300:
             return "Destination created"
         else:
             return "Failed with status code: {0}{1}".format(request.status_code, request.headers)
@@ -31,14 +31,14 @@ class Destination():
     def update_destination(self, destination_id, json):
         headers = {'Content-Type': 'application/json'}
         request = requests.put(self.base_url + "/" + str(destination_id), auth=(self.api_key, 'pass'), data=json, headers=headers)
-        if request.status_code == 200:
+        if request.status_code >= 200 and request.status_code < 300:
             return "Destination updated"
         else:
             return "Failed with status code: {0}".format(request.status_code)
 
     def delete_destination(self, destination_id):
         request = requests.delete(self.base_url + "/" + str(destination_id), auth=(self.api_key, 'pass'))
-        if request.status_code == 200:
+        if request.status_code >= 200 and request.status_code < 300:
             return "Destination deleted"
         else:
             return "Failed with status code: {0}".format(request.status_code)

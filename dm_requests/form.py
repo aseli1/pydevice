@@ -19,7 +19,7 @@ class Form():
     def create_form(json):
         headers = {'Content-Type': 'application/json'}    
         request = requests.post(dm_base_url, auth=(api_key, 'pass'), data=json, headers=headers)
-        if request.status_code == 201:
+        if request.status_code >= 200 and request.status_code < 300:
             return "Form created"
         else:
             return "Failed with status code: {0}".format(request.status_code)
@@ -27,14 +27,14 @@ class Form():
     def update_form(form_id, json):
         headers = {'Content-Type': 'application/json'}
         request = requests.put(dm_base_url + "/" + str(form_id), auth=(api_key, 'pass'), data=json, headers=headers)
-        if request.status_code == 202:
+        if request.status_code >= 200 and request.status_code < 300:
             return "Form updated"
         else:
             return "Failed with status code: {0}".format(request.status_code)
 
     def delete_form(self, form_id):
         request = requests.delete(self.base_url + "/" + str(form_id), auth=(self.api_key, 'pass'))
-        if request.status_code == 200:
+        if request.status_code >= 200 and request.status_code < 300:
             return "Form deleted"
         else:
             return "Failed with status code: {0}".format(request.status_code)
@@ -42,7 +42,7 @@ class Form():
     def update_form_group(self, form_id, json):
         headers = {'Content-Type': 'application/json'}
         request = requests.post(self.base_url + "/" + str(form_id) + "/properties", auth=(self.api_key, 'pass'), data=json, headers=headers)
-        if request.status_code == 200:
+        if request.status_code >= 200 and request.status_code < 300:
             return "Form group updated"
         else:
             return "Failed with status code: {0} {1}".format(request.status_code)
