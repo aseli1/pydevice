@@ -1,9 +1,9 @@
-from database import Database
-from destination import Destination
-from device import Device
-from form import Form
-from resource import Resource
-from auth import DeviceMagicAuth
+from .database import Database
+from .destination import Destination
+from .device import Device
+from .form import Form
+from .resource import Resource
+from .auth import DeviceMagicAuth
 import requests
 
 class DeviceMagic():
