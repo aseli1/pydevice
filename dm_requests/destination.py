@@ -1,59 +1,58 @@
-import requests
 import json
 
 class Destination():
 
-    def __init__(self, args={}):
-        self.api_key = args['api_key']
-        self.form_id = str(args['form_id'])
+    def __init__(self, session, form_id):
+        self.r = session
+        self.form_id = form_id
         self.base_url = 'https://www.devicemagic.com/api/forms/{0}/destinations'.format(self.form_id)
 
-    def all_destinations(self):
-        request = requests.get(self.base_url + ".json", auth=(self.api_key, 'pass'))
+    def all(self):
+        request = self.r.get(self.base_url + ".json")
         return request.json()
 
-    def destination_details(self, destination_id):
-        request = requests.get(self.base_url + "/" + str(destination_id) + ".json", auth=(self.api_key, 'pass'))
+    def details(self, destination_id):
+        request = self.r.get(self.base_url + "/" + str(destination_id) + ".json")
         return request.json()
 
-    def create_destination(self, json, form_id=None):
+    def create(self, json, form_id=None):
         if form_id != None:
             url = "https://www.devicemagic.com/api/forms/{0}/destinations".format(form_id)
         else:
             url = self.base_url
         headers = {'Content-Type': 'application/json'}    
-        request = requests.post(url, auth=(self.api_key, 'pass'), data=json, headers=headers)
+        request = self.r.post(url, data=json, headers=headers)
         if request.status_code >= 200 and request.status_code < 300:
             return "Destination created"
         else:
-            return "Failed with status code: {0}{1}".format(request.status_code, request.headers)
+            return "Failed with status code: {0}".format(request.status_code)
 
-    def update_destination(self, destination_id, json):
+    def update(self, destination_id, json):
         headers = {'Content-Type': 'application/json'}
-        request = requests.put(self.base_url + "/" + str(destination_id), auth=(self.api_key, 'pass'), data=json, headers=headers)
+        request = self.r.put(self.base_url + "/" + str(destination_id), data=json, headers=headers)
         if request.status_code >= 200 and request.status_code < 300:
             return "Destination updated"
         else:
             return "Failed with status code: {0}".format(request.status_code)
 
-    def delete_destination(self, destination_id):
-        request = requests.delete(self.base_url + "/" + str(destination_id), auth=(self.api_key, 'pass'))
+    def delete(self, destination_id):
+        request = self.r.delete(self.base_url + "/" + str(destination_id))
         if request.status_code >= 200 and request.status_code < 300:
             return "Destination deleted"
         else:
             return "Failed with status code: {0}".format(request.status_code)
 
-    def copy_destination(self, destination_id, form_id=None):
-        destination_to_copy = self.destination_details(destination_id)
+    def copy(self, destination_id, form_id=None):
+        destination_to_copy = self.details(destination_id)
         format = destination_to_copy["destination"]["format_type"]
         transport = destination_to_copy["destination"]["transport_type"]
         binary = destination_to_copy["destination"]["binary_transport_type"]
         destination_elements = [format, transport, binary]
-        self.remove_keys(destination_elements, destination_to_copy)
-        new_destination_json = self.format_destination_json(destination_to_copy, format, transport, binary)
-        return self.create_destination(new_destination_json, form_id=form_id)
+        self.__remove_keys(destination_elements, destination_to_copy)
+        new_destination_json = self.__format_destination_json(destination_to_copy, format, transport, binary)
+        return self.create(new_destination_json, form_id=form_id)
 
-    def remove_keys(self, destination_elements, json):
+    def __remove_keys(self, destination_elements, json):
         for element in destination_elements:
             if element == None:
                 continue
@@ -61,7 +60,7 @@ class Destination():
             del json["destination"][element]["created_at"]
             del json["destination"][element]["updated_at"]
 
-    def format_destination_json(self, destination_to_copy, format, transport, binary):
+    def __format_destination_json(self, destination_to_copy, format, transport, binary):
         new_destination_json = {}
         new_destination_json["destination"] = {}
         new_destination_json["destination"]["description"] = destination_to_copy["destination"]["description"]

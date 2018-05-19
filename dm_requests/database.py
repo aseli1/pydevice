@@ -1,14 +1,12 @@
-import requests
-
 class Database():
 
-    def __init__(self, args={}):
-        self.api_key = args['api_key']
-        self.database_id = str(args['database_id'])
+    def __init__(self, session, database_id):
+        self.r = session
+        self.database_id = database_id
         self.base_url = 'https://www.devicemagic.com/api/forms/{0}/device_magic_database.json'.format(self.database_id)
 
     def simple_request(self):
-        request = requests.get(self.base_url, auth=(self.api_key, 'pass')) # For all submissions within the Device Magic Database
+        request = self.r.get(self.base_url) # For all submissions within the Device Magic Database
         return request.json()
 
     def join_params(self, parameters):
@@ -18,10 +16,10 @@ class Database():
 
     def request_with_params(self, parameters):
         params = self.join_params(parameters)
-        request = requests.get(self.base_url + params, auth=(self.api_key, 'pass'))
+        request = self.r.get(self.base_url + params)
         return request.json()
 
-    def db_request(self, *args):
+    def json(self, *args):
         return self.request_with_params(args) if args else self.simple_request()
 
 

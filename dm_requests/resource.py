@@ -1,53 +1,64 @@
-import requests
 import base64
 
 class Resource():
 
-    def __init__(self, args={}):
-        self.api_key = args['api_key']
-        self.resource_id = str(args.get('resource_id'))
-        self.file_path = args.get('file_path')
+    def __init__(self, session, resource_id, file_path):
+        self.r = session
+        self.resource_id = resource_id
+        self.file_path = file_path
         self.base_url = 'https://www.devicemagic.com/api/resources'
         self.content_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
 
-    def all_resources(self):
-        request = requests.get(self.base_url + ".json", auth=(self.api_key, 'pass')) # To get an overview of all the resources
+    def all(self):
+        request = self.r.get(self.base_url + ".json") # To get an overview of all the resources
         return request.json()
 
-    def resource_download(self):
-        resource_file = requests.get(self.base_url + "/" + self.resource_id, auth=(self.api_key, 'pass'))
-        return resource_file
+    def download(self):
+        request = self.r.get(self.base_url + "/" + self.resource_id)
+        return request.text
 
-    def resource_details(self):
-        request = requests.get(self.base_url + "/"+ self.resource_id + "/describe.json", auth=(self.api_key, 'pass'))
+    def details(self):
+        request = self.r.get(self.base_url + "/"+ self.resource_id + "/describe.json")
         return request.json()
 
-    def encode_file(self):
+    def __encode_file(self):
         with open(self.file_path, "rb") as resource_file:
             encoded_file = base64.b64encode(resource_file.read())
             self.encoded_file = encoded_file
 
-    def create_resource(self, description, file_name, content_type=None):
+    def create(self, description, file_name, content_type=None):
         if content_type == None:
           content_type = self.content_type
 
-        self.encode_file()
+        self.__encode_file()
         json = {"resource": {"description": description,
                              "file": {"file_name": file_name,
                                       "file_data": self.encoded_file,
                                       "content_type": content_type}}}
-        request = requests.post(self.base_url + ".json", auth=(self.api_key, 'pass'), json=json)
+        request = self.r.post(self.base_url + ".json", json=json)
+        if request.status_code >= 200 and request.status_code < 300:
+            return "Resource created"
+        else:
+            return "Failed with status code: {0}".format(request.status_code)
 
-    def update_resource(self, description, file_name, content_type=None):
+    def update(self, description, file_name, content_type=None):
         if content_type == None:
           content_type = self.content_type
 
-        self.encode_file()
+        self.__encode_file()
         json = {"resource": {"description": description,
                              "file": {"file_name": file_name,
                                       "file_data": self.encoded_file,
                                       "content_type": content_type}}}
-        request = requests.put(self.base_url + "/" + self.resource_id, auth=(self.api_key, 'pass'), json=json)
+        request = self.r.put(self.base_url + "/" + self.resource_id, json=json)
+        if request.status_code >= 200 and request.status_code < 300:
+            return "Resource updated"
+        else:
+            return "Failed with status code: {0}".format(request.status_code)
 
-    def delete_resource(self):
-        request = requests.delete(self.base_url + "/" + self.resource_id, auth=(self.api_key, 'pass'))
+    def delete(self):
+        request = self.r.delete(self.base_url + "/" + self.resource_id)
+        if request.status_code >= 200 and request.status_code < 300:
+            return "Resource deleted"
+        else:
+            return "Failed with status code: {0}".format(request.status_code)
