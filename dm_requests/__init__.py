@@ -1,5 +1,1 @@
-from .database import Database
-from .resource import Resource
-from .device import Device
-from .form import Form
-from .destination import Destination
+from .device_magic import DeviceMagic
