@@ -22,4 +22,4 @@ class DeviceMagic():
         self.destination = Destination(session, self.form_id)
         self.device = Device(session, self.org_id)
         self.form = Form(session, self.org_id)
-        self.resource = Resource(session, self.resource_id, self.file_path)
+        self.resource = Resource(session, self.file_path)
