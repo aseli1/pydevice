@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(name='dm_requests',
       version='0.1.0',
-      description="Library for working with Device Magic's API",
+      description="Device Magic's API Wrapper",
       url='',
       author='Anthony Seliga',
       author_email='anthony.seliga@gmail.com',
@@ -10,5 +10,7 @@ setup(name='dm_requests',
       packages=['dm_requests'],
       install_requires=[
           'requests',
+          'vcrpy',
+          'pytest',
       ],
       zip_safe=False)
