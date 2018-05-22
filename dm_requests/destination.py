@@ -29,7 +29,7 @@ class Destination():
 
     def update(self, destination_id, json):
         headers = {'Content-Type': 'application/json'}
-        request = self.r.put(self.base_url + "/" + str(destination_id), data=json, headers=headers)
+        request = self.r.put(self.base_url + "/" + str(destination_id) + ".json", data=json, headers=headers)
         if request.status_code >= 200 and request.status_code < 300:
             return "Destination updated"
         else:
