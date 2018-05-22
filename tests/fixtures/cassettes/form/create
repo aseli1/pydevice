@@ -1,0 +1,36 @@
+interactions:
+- request:
+    body: '{"type": "root", "children": [{"identifier": "Untitled_Question", "title":
+      "Untitled Question", "autoIdentifier": true, "type": "text"}], "title": "Untitled
+      Form"}'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic ZUtTOEJhWnptMlNZWjQxaXJUaUY6eA==]
+      Connection: [keep-alive]
+      Content-Length: ['163']
+      Content-Type: [application/json]
+      Cookie: [devices_smart_listing_per_page=10; forms_smart_listing_per_page=10;
+          pending_submissions_smart_listing_per_page=10]
+      User-Agent: [python-requests/2.18.4]
+    method: POST
+    uri: https://www.devicemagic.com/organizations/38298/forms
+  response:
+    body: {string: '{"id":7179759,"namespace":"http://www.devicemagic.com/xforms/59005f00-3f8e-0136-a84d-22000a6dab61","name":"Untitled
+        Form"}'}
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Connection: [keep-alive]
+      Content-Length: ['122']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Tue, 22 May 2018 01:35:37 GMT']
+      ETag: [W/"7250f10bca9ff1c998bf02a69374e1d4"]
+      Server: [nginx]
+      Status: [201 Created]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [dcefadf8-84b8-4a77-9980-d75895786013]
+      X-Runtime: ['2.102448']
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 201, message: Created}
+version: 1

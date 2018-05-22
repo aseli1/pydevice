@@ -1,0 +1,44 @@
+interactions:
+- request:
+    body: '{"destination": {"description": "Some description", "format_selection":
+      "word_format", "transport_selection": "http_transport", "binary_transport_selection":
+      "binary_google_drive_transport"}, "word_format": {"file_name_template": "My_Doc"},
+      "http_transport": {"uri": "test.com"}, "binary_google_drive_transport": {"google_account_email":
+      "myemail@gmail.com"}}'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic ZUtTOEJhWnptMlNZWjQxaXJUaUY6eA==]
+      Connection: [keep-alive]
+      Content-Length: ['359']
+      Content-Type: [application/json]
+      Cookie: [request_method=POST]
+      User-Agent: [python-requests/2.18.4]
+    method: PUT
+    uri: https://www.devicemagic.com/api/forms/4521183/destinations/2675224
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA5RSS2/UMBA+7/6KaSoESDhOaKloNrsH2iKQClQoFfTojSeJhWMH2/ui4r8zzq7a
+        CnEhl2Qy9veY+cqjyy8X1d3NFXSh13Bz++764wUkjPNvJxecX1aX8P1D9eka8jSDygnjVVDWCM35
+        1edkCvsn6UIYCs43m026OUmta3n1lW8jZB4xDp8sPAFIZZDJYjotR+Jtr42f/wMnPz8/319P4qFC
+        C9POEzQJPHyNICjkguSUPQZBXsLA8OdKredJbU1AE1jYDZjAoZonAbeBR+oZ1J1wHsP8tnrP3ibA
+        R5yggsZF1SEMokXY2RVs0CFoa38o00JjHUiL3jwPgFvlA7w4zU5flnx/cTopfdhphEh7YKu9J8OT
+        ydLKHdzDUtQ/WmdXRrLaausKOG6ahuQcirOzsxlEmUxo1ZoCarKBbkbUZKcRvdK7AoRTQr8CT5th
+        Hp0igN/EIdU6ldSxLdxTOdkoGboCXr/BfhbrQUhJNgrI4PTwqxeuVURDNYhVsNSKr/H40jqJpDAf
+        tuCtVhKO67p+0mJOtV14MEJLe9pc2hBs/3c36uxymsRoyKtfSARZ9uxxBE2WzUArg6zDiE/9NDqI
+        Fks+DngxLfl++dMyDnZc3hFjUHXKQ6NoBVqt0YMyMKyWWtWc9pSOoWNsPE2zgloLT/nbj4y2FHNd
+        dvn/BCAlIfnh5rC4o8D0YgedWCP0lA/KgYRAeaLJO/QeKECxHOP1eNKuURLSMCrjJC0a3BsjfFK9
+        +AMAAP//AwCLJiTRswMAAA==
+    headers:
+      Connection: [keep-alive]
+      Content-Encoding: [gzip]
+      Content-Length: ['586']
+      Content-Type: [text/html; charset=utf-8]
+      Date: ['Tue, 22 May 2018 01:35:29 GMT']
+      Server: [nginx]
+      Status: [404 Not Found]
+      X-Request-Id: [a90c088f-26bb-4625-93b6-dd11cdec50e4]
+      X-Runtime: ['0.028199']
+    status: {code: 404, message: Not Found}
+version: 1

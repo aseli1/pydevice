@@ -1,0 +1,40 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic ZUtTOEJhWnptMlNZWjQxaXJUaUY6eA==]
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.18.4]
+    method: GET
+    uri: https://www.devicemagic.com/api/forms/4521183/destinations.json
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA7SW246jMAyG3yXXdBXnCHkOrna1QgxkukidgkI6B4367mtKO4UBKnaBuwr/Duar
+        fzufJLe1L46pL8pjTcyvT1LkxAAIGlIVNNHMFVUTJYaQgKSZL14tMd6dbECeS/eSNAlCMoCQt09S
+        n/iPCkWkrpxN8/qPtT5ptKnHI9ofbVqkGccs79JjXZXuKzG3r0Vmk5d0X2TJVxST78rLa0MtIAzI
+        E36B+7gLb++/Pt+X5f5gk9xh6b3TBnmXQ5nAIzOs3Ns8wZINYRTUjoY7iGLghlED+gel9CcWdKry
+        GbpzcAWrNKVMLAZb5c+jQEGHWo/xdGX1VL4/QKkuZQ2AtH/k8XQ4jAQbWm1oSAvYjrIYtAFmhJim
+        ddcpw2Wr69PC71nYhm+ly0dxhZGCEVqT/dLvPsk4G6GyHBkThqsZyDq6GzKm0FKNJbZCBkIz+v/M
+        cLIINPxafRbuqNwxGkNkaGR4NAVtXNeHFm0LbUGjNdBWNGcHBoCR4QxoHV0XmuByW2jor8FumOnO
+        BhpWt26nQUwBh7+B66Qazv8W7nddB1ooJPpnQ3tydP8CaHJ6n/7zGrjBwI1JhRH0cadB3Nf1oOnl
+        S3NyDeBM4+j+JdAwfe1OQxgSF8EcaB1dF5rUOGo37DSxbBE0u3ddaKyxJ1UPrmdtR37X9aFt22li
+        2SJQK145OjDwlkYn77TjuvPv818AAAD//wMAPcQ0cT8MAAA=
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Connection: [keep-alive]
+      Content-Encoding: [gzip]
+      Content-Length: ['548']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Tue, 22 May 2018 01:35:28 GMT']
+      Server: [nginx]
+      Status: [200 OK]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [dda5eaff-3b99-423c-80bd-a58f8fc752f5]
+      X-Runtime: ['0.135557']
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

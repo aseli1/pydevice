@@ -1,0 +1,40 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic ZUtTOEJhWnptMlNZWjQxaXJUaUY6eA==]
+      Connection: [keep-alive]
+      Cookie: [request_method=POST]
+      User-Agent: [python-requests/2.18.4]
+    method: GET
+    uri: https://www.devicemagic.com/organizations/38298/devices.xml
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA+SQTW6DMBCF9zkFYu/yE1yMRIggCesu0nVk7CG1RGxkG9r09DWFdNFyg+5m3hu/
+        GX/5/uPWeSNoI5Tc+dFT6HsgmeJCXnf+67lGxN8Xm5zDKBgYz9572PlUa3r3i43nLcZUukbwIsYR
+        TsI8cOVDA2lFK0AX4uVNSbgctklak2OJ8OFUoSSsEkTKqkJ1HZeY4OhUReUU8PNuDlL6SqX4pNZd
+        ilz8lsQZyYPf8jL8Lt3CMxjrJr7rWedgmBb9lBEsUg9y+i2ifa/VSLuipZ2BPPijzwlXrYbeFEdo
+        6dC59KWfTTYYq26IWqtFM1gwy45g1ciDGes6SBI5lusgS8m1EvzCMYtpxhuUshRQ8owblEHGUBsS
+        2kRZwzln/4zkg6kj/wUAAP//AwBa+sdY3AIAAA==
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Connection: [keep-alive]
+      Content-Encoding: [gzip]
+      Content-Length: ['313']
+      Content-Type: [application/xml; charset=utf-8]
+      Date: ['Tue, 22 May 2018 01:35:30 GMT']
+      Server: [nginx]
+      Set-Cookie: [devices_smart_listing_per_page=10; path=/, 'request_method=; path=/;
+          max-age=0; expires=Thu, 01 Jan 1970 00:00:00 -0000']
+      Status: [200 OK]
+      Vary: [Origin]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [cda24e04-3cb2-4634-baee-f63f9b640966]
+      X-Runtime: ['0.089173']
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1
