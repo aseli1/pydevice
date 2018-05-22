@@ -6,7 +6,6 @@ class DeviceMagicAuth(requests.auth.AuthBase):
 
     def __init__(self, api_key=None):
         """
-        Authentication used by DeviceMagic Class
         Args:
             api_key (``str``): DeviceMagic API Key. Optional.
                 If not set, it will look for
