@@ -16,6 +16,7 @@ pip install dm-requests
 
 ## Usage
 ```python
+>>> from dm_requests import DeviceMagic
 >>> args = {'org_id': 3000,'database_id': 580, 'form_id': 6000, 'resource_id': 103, 'file_path': path/to/file}
 >>> dm = DeviceMagic(args)
 >>> dm.form.all() # destination, device, form, and resource also have this method
