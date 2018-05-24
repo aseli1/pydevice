@@ -24,13 +24,13 @@ pip install dm-requests
 
 ## Authentication
 Authentication is handled by the DeviceMagic class. The class can handle authentication automatically if the environment variable DEVICEMAGIC_API_KEY is set with your api key.
-
+```python
 >>> dm = DeviceMagic(args)
-
+```
 In preference, you can pass the key explicitly:
-
+```python
 >>> dm = DeviceMagic({'api_key': 'HTTP_Auth_Header_Value'})
-
+```
 ### Database
 ```python
 >>> dm.database.json()
@@ -53,7 +53,7 @@ Optionally you can pass the id of a different form in which you'd like to copy t
 ```python
 >>> dm.device.approve(2801)
 'Device approved'
-
+```
 ### Form
 ```python
 >>> dm.form.details(3005)
