@@ -16,16 +16,16 @@ def test_details():
 
 @vcr.use_cassette('tests/cassettes/device/approve')
 def test_approve():
-    response = dm.device.details(test_device['details_id'])
-    assert isinstance(response, str)
+    response = dm.device.approve(test_device['update_id'])
+    assert response == 'Device approved'
 
 @vcr.use_cassette('tests/cassettes/device/update')
 def test_update():
     response = dm.device.update(test_device['update_id'], test_device['update_xml'])
-    assert isinstance(response, str)
+    assert response == 'Device updated'
 
 @vcr.use_cassette('tests/cassettes/device/delete')
 def test_delete():
     response = dm.device.delete(test_device['update_id'])
-    assert isinstance(response, str)  
+    assert response == 'Device deleted' 
       
