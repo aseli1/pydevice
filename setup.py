@@ -14,10 +14,10 @@ setuptools.setup(
     author_email='anthony.seliga@gmail.com',
     license='MIT',
     packages=['dm_requests'],
-    python_requires='>3.0'
+    python_requires='>3.0',
     install_requires=[
         'requests',
         'vcrpy',
-        'pytest',
+        'pytest'
     ],
     zip_safe=False)
