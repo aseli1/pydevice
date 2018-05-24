@@ -15,13 +15,22 @@ class Device():
 
     def approve(self, device_id):
         request = self.r.post(self.base_url + "/"+ str(device_id) + "/approve")
-        return request.text
-
+        if request.status_code >= 200 and request.status_code < 300:
+            return "Device approved"
+        else:
+            return "Failed with status code: {0}".format(request.status_code)
+            
     def delete(self, device_id):
         request = self.r.delete(self.base_url + "/" + str(device_id))
-        return request.text
+        if request.status_code >= 200 and request.status_code < 300:
+            return "Device deleted"
+        else:
+            return "Failed with status code: {0}".format(request.status_code)
 
     def update(self, device_id, xml):
         headers = {'Content-Type': 'application/xml'}
         request = self.r.put(self.base_url + "/" + str(device_id), data=xml, headers=headers)
-        return request.text
+        if request.status_code >= 200 and request.status_code < 300:
+            return "Device updated"
+        else:
+            return "Failed with status code: {0}".format(request.status_code)
