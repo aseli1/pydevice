@@ -18,6 +18,6 @@ setuptools.setup(
     install_requires=[
         'requests',
         'vcrpy',
-        'pytest'
+        'pytest',
     ],
     zip_safe=False)
