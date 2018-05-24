@@ -1,4 +1,69 @@
 # dm_requests
 Library for working with Device Magic's API
 
-## Currently supports Device Magic Database, Destinations, Devices, Forms, and Resources.
+Currently supports:
+
+* Device Magic Database 
+* Destinations
+* Devices
+* Forms
+* Resources
+
+## Installation
+```python
+pip install dm-requests
+```
+
+## Usage
+```python
+>>> args = {'org_id': 3000,'database_id': 580, 'form_id': 6000, 'resource_id': 103, 'file_path': path/to/file}
+>>> dm = DeviceMagic(args)
+>>> dm.form.all() # destination, device, form, and resource also have this method
+{'forms': [{'id': 40015631, 'name': 'Daily Report'...}
+```
+
+## Authentication
+Authentication is handled by the DeviceMagic class. The class can handle authentication automatically if the environment variable DEVICEMAGIC_API_KEY is set with your api key.
+
+>>> dm = DeviceMagic(args)
+
+In preference, you can pass the key explicitly:
+
+>>> dm = DeviceMagic({'api_key': 'HTTP_Auth_Header_Value'})
+
+### Database
+```python
+>>> dm.database.json()
+{'per_page': 30, 'current_page': 1, 'total_pages': 1, 'current_count': 13, 'total_count': 13, 'submissions': [{'form'...
+>>> dm.database.json("from_date=2018-5-1 00:00", "to_date=2018-5-31 00:00")
+{...'total_count': 1, 'submissions': [{'form': {'id': 6009105, 'name': 'Sales Report'...}
+```
+
+### Destination
+```python
+>>> dm.destination.copy(26754)
+'Destination created'
+```
+Optionally you can pass the id of a different form in which you'd like to copy the destination to.
+```
+>>> dm.destination.copy(26754, form_id=4008185)
+```
+
+### Device
+```python
+>>> dm.device.approve(2801)
+'Device approved'
+
+### Form
+```python
+>>> dm.form.details(3005)
+{'type': 'root', 'children': [{'identifier': 'Yes_No_Question', 'title': 'Yes/No Question', 'autoIdentifier': True, 'type': 'boolean'}, {'identifier': 'Date_Question', 'title': 'Date Question', 'autoIdentifier': True, 'type': 'date'}...}
+```
+
+### Resource
+```python
+>>> dm.resource.update(480,'client_list', 'client_list.xlsx')
+'Resource updated'
+```
+
+[Official Device Magic API docs](https://docs.devicemagic.com/create-custom-integrations-with-our-restapi)
