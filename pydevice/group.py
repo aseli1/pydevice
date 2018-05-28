@@ -31,20 +31,3 @@ class Group():
             return "Group deleted"
         else:
             return "Failed with status code: {0}".format(request.status_code)
-
-'''
-    def details(self, form_id):
-        request = self.r.get(self.base_url + "/"+ str(form_id) + ".json")
-        return request.json()
-'''
-
-'''
-
-    def new_group(self, form_id, json):
-        headers = {'Content-Type': 'application/json'}
-        request = self.r.post(self.base_url + "/" + str(form_id) + "/properties", data=json, headers=headers)
-        if request.status_code >= 200 and request.status_code < 300:
-            return "Form group updated"
-        else:
-            return "Failed with status code: {0} {1}".format(request.status_code)
-'''
