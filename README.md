@@ -8,6 +8,7 @@ Currently supports:
 * Devices
 * Forms
 * Resources
+* Groups
 
 ## Installation
 ```python
@@ -19,7 +20,7 @@ pip install pydevice
 >>> from pydevice import DeviceMagic
 >>> args = {'org_id': 3000,'database_id': 580, 'form_id': 6000, 'resource_id': 103, 'file_path': 'path/to/file'}
 >>> dm = DeviceMagic(args)
->>> dm.form.all() # destination, device, form, and resource also have this method
+>>> dm.form.all() # destination, device, form, resource, and group also have this method
 {'forms': [{'id': 40015631, 'name': 'Daily Report'...}
 ```
 
@@ -65,6 +66,12 @@ Optionally you can pass the id of a different form in which you'd like to copy t
 ```python
 >>> dm.resource.update(480,'client_list', 'client_list.xlsx')
 'Resource updated'
+```
+
+### Group
+```python
+>>> dm.group.delete(615)
+'Group deleted'
 ```
 
 [Official Device Magic API docs](https://docs.devicemagic.com/create-custom-integrations-with-our-restapi)
