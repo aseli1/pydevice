@@ -1,5 +1,5 @@
-# dm_requests
-Library for working with Device Magic's API
+# pydevice
+Device Magic API Wrapper
 
 Currently supports:
 
@@ -11,13 +11,13 @@ Currently supports:
 
 ## Installation
 ```python
-pip install dm-requests
+pip install pydevice
 ```
 
 ## Usage
 ```python
->>> from dm_requests import DeviceMagic
->>> args = {'org_id': 3000,'database_id': 580, 'form_id': 6000, 'resource_id': 103, 'file_path': path/to/file}
+>>> from pydevice import DeviceMagic
+>>> args = {'org_id': 3000,'database_id': 580, 'form_id': 6000, 'resource_id': 103, 'file_path': 'path/to/file'}
 >>> dm = DeviceMagic(args)
 >>> dm.form.all() # destination, device, form, and resource also have this method
 {'forms': [{'id': 40015631, 'name': 'Daily Report'...}

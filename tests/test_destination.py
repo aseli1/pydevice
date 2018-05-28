@@ -1,4 +1,4 @@
-from dm_requests import DeviceMagic
+from pydevice import DeviceMagic
 from .test_object import test_object, test_destination
 import vcr
 
