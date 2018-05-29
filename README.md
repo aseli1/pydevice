@@ -18,9 +18,9 @@ pip install pydevice
 ## Usage
 ```python
 >>> from pydevice import DeviceMagic
->>> args = {'org_id': 3000,'database_id': 580, 'form_id': 6000, 'resource_id': 103, 'file_path': 'path/to/file'}
+>>> args = {'org_id': 3000,'database_id': 580, 'form_id': 6000, 'resource_id': 103, 'file_path': 'path/to/file', 'device_identifier': 'Android_d5c2a885'}
 >>> dm = DeviceMagic(args)
->>> dm.form.all() # destination, device, form, resource, and group also have this method
+>>> dm.form.all() # destination, device, resource, group, and dispatch also have this method
 {'forms': [{'id': 40015631, 'name': 'Daily Report'...}
 ```
 
@@ -72,6 +72,19 @@ Optionally you can pass the id of a different form in which you'd like to copy t
 ```python
 >>> dm.group.delete(615)
 'Group deleted'
+```
+
+### Dispatch
+```python
+>>> import json
+>>> dispatch_json = { "form_namespace" : "http://www.devicemagic.com/xforms/4c0a6400-ef90-8283-8586-22000a1ddaf9", 
+                             "payload" : {
+                               "Group" : []
+                        }
+                    }
+>>> dispatch_json = json.dumps(dispatch_json)
+>>> dm.dispatch.push(dispatch_json)
+'Dispatch successful'
 ```
 
 [Official Device Magic API docs](https://docs.devicemagic.com/create-custom-integrations-with-our-restapi)
