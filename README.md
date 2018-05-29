@@ -9,6 +9,7 @@ Currently supports:
 * Forms
 * Resources
 * Groups
+* Dispatch
 
 ## Installation
 ```python
