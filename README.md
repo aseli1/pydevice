@@ -84,7 +84,7 @@ Optionally you can pass the id of a different form in which you'd like to copy t
                         }
                     }
 >>> dispatch_json = json.dumps(dispatch_json)
->>> dm.dispatch.push(dispatch_json)
+>>> dm.dispatch.push(iPhone_3945, dispatch_json)
 'Dispatch successful'
 ```
 
