@@ -19,7 +19,7 @@ pip install pydevice
 ## Usage
 ```python
 >>> from pydevice import DeviceMagic
->>> args = {'org_id': 3000,'database_id': 580, 'form_id': 6000, 'resource_id': 103, 'file_path': 'path/to/file', 'device_identifier': 'Android_d5c2a885'}
+>>> args = {'org_id': 3000,'database_id': 580, 'form_id': 6000, 'resource_id': 103, 'file_path': 'path/to/file'}
 >>> dm = DeviceMagic(args)
 >>> dm.form.all() # destination, device, resource, group, and dispatch also have this method
 {'forms': [{'id': 40015631, 'name': 'Daily Report'...}
