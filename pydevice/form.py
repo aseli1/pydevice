@@ -27,7 +27,7 @@ class Form():
         if request.status_code >= 200 and request.status_code < 300:
             return "Form updated"
         else:
-            return "Failed with status code: {0}{1}".format(request.status_code, request.headers)
+            return "Failed with status code: {0}".format(request.status_code)
 
     def delete(self, form_id):
         request = self.r.delete(self.base_url + "/" + str(form_id))
@@ -42,4 +42,4 @@ class Form():
         if request.status_code >= 200 and request.status_code < 300:
             return "Form group updated"
         else:
-            return "Failed with status code: {0} {1}".format(request.status_code)
+            return "Failed with status code: {0}".format(request.status_code)
