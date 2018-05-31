@@ -3,6 +3,8 @@ from .destination import Destination
 from .device import Device
 from .form import Form
 from .resource import Resource
+from .group import Group
+from .dispatch import Dispatch
 from .auth import DeviceMagicAuth
 import requests
 
@@ -18,8 +20,11 @@ class DeviceMagic():
         self.org_id = str(args.get('org_id'))
         self.resource_id = str(args.get('resource_id'))
         self.file_path = args.get('file_path')
+        self.device_identifier = args.get('device_identifier')
         self.database = Database(session, self.database_id)
         self.destination = Destination(session, self.form_id)
         self.device = Device(session, self.org_id)
         self.form = Form(session, self.org_id)
         self.resource = Resource(session, self.file_path)
+        self.group = Group(session, self.org_id)
+        self.dispatch = Dispatch(session, self.org_id)
