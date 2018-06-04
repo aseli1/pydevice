@@ -1,5 +1,5 @@
 # pydevice
-Device Magic API Wrapper
+Python interface for the Device Magic API
 
 Currently supports:
 
@@ -34,6 +34,7 @@ In preference, you can pass the key explicitly:
 ```python
 >>> dm = DeviceMagic({'api_key': 'HTTP_Auth_Header_Value'})
 ```
+
 ### Database
 ```python
 >>> dm.database.json()
@@ -57,6 +58,7 @@ Optionally you can pass the id of a different form in which you'd like to copy t
 >>> dm.device.approve(2801)
 'Device approved'
 ```
+
 ### Form
 ```python
 >>> dm.form.details(3005)
