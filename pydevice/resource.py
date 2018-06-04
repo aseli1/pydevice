@@ -7,7 +7,7 @@ class Resource():
         self.r = session
         self.file_path = file_path
         self.base_url = 'https://www.devicemagic.com/api/resources'
-        self.content_type = mimetypes.guess_type(file_path)
+        self.content_type = mimetypes.guess_type(self.file_path) if self.file_path != None else None
 
     def all(self):
         request = self.r.get(self.base_url + ".json") # To get an overview of all the resources
