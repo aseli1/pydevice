@@ -29,4 +29,3 @@ nosetests.xml
 coverage.xml
 
 tests/cassettes/
-test_object.py
