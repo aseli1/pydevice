@@ -12,9 +12,21 @@ Currently supports:
 * Dispatch
 
 ## Installation
+
+PyPi:
+
 ```python
 pip install pydevice
 ```
+
+Git:
+
+```python
+git clone https://github.com/aseli1/pydevice.git
+cd pydevice
+python setup.py install
+```
+Tested on Python 3.6 -- works on Mac
 
 ## Usage
 ```python
