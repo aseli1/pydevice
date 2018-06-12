@@ -1,16 +1,6 @@
 # pydevice
 Python interface for the Device Magic API
 
-Currently supports:
-
-* Device Magic Database 
-* Destinations
-* Devices
-* Forms
-* Resources
-* Groups
-* Dispatch
-
 ## Installation
 
 PyPi:
@@ -40,66 +30,177 @@ Tested on Python 3.6 -- works on Mac
 ## Authentication
 Authentication is handled by the DeviceMagic class. The class can handle authentication automatically if the environment variable DEVICEMAGIC_API_KEY is set with your api key.
 ```python
+>>> import os
+>>> os.environ['DEVICEMAGIC_API_KEY'] = 'Basic c3ppZhh39fj3Wjk6eA=='
 >>> dm = DeviceMagic(args)
 ```
 In preference, you can pass the key explicitly:
 ```python
->>> dm = DeviceMagic({'api_key': 'HTTP_Auth_Header_Value'})
+>>> dm = DeviceMagic({'api_key': 'Basic c3ppZhh39fj3Wjk6eA=='})
 ```
 
 ### Database
 ```python
->>> dm.database.json()
+>>> from pydevice import DeviceMagic
+>>> args = {'database_id': 500}
+>>> dm = DeviceMagic(args)
+>>>
+>>> dm.database.json() # All submissions
 {'per_page': 30, 'current_page': 1, 'total_pages': 1, 'current_count': 13, 'total_count': 13, 'submissions': [{'form'...
->>> dm.database.json("from_date=2018-5-1 00:00", "to_date=2018-5-31 00:00")
+>>>
+>>> dm.database.json("from_date=2018-5-1 00:00", "to_date=2018-5-31 00:00") # Filter submissions
 {...'total_count': 1, 'submissions': [{'form': {'id': 6009105, 'name': 'Sales Report'...}
 ```
 
 ### Destination
 ```python
->>> dm.destination.copy(26754)
-'Destination created'
-```
-Optionally you can pass the id of a different form in which you'd like to copy the destination to.
-```
->>> dm.destination.copy(26754, form_id=4008185)
+>>> from pydevice import DeviceMagic
+>>> args = {'form_id': 700}
+>>> dm = DeviceMagic(args)
+>>>
+>>> from some_file import destination_json
+>>> docx_to_email = 17443
+>>> google_sheet = 17465
+>>> old_destination = 17432
+>>> new_form = 8475
+>>>
+>>> dm.destination.all() # All form destinations
+{'destinations': [{'id': 17442, 'description': None, 'active': True...}]}
+>>>
+>>> dm.destination.details(docx_to_email)
+{'destination': {'id': 17443, 'description': '', 'active': True, 'form_id': 7225921, 'format_type': 'word_format', 'format_id': 14990, 'transport_type': 'email_transport'...
+>>>
+>>> dm.destination.create(destination_json) # Create a destination
+>>>
+>>> dm.destination.update(google_sheet, destination_json)
+>>>
+>>> dm.destination.delete(old_destination)
+>>>
+>>> dm.destination.copy(docx_to_email) # Copy a destination
+>>> dm.destination.copy(docx_to_email, form_id=new_form) # Copy to another form
 ```
 
 ### Device
 ```python
->>> dm.device.approve(2801)
-'Device approved'
+>>> from pydevice import DeviceMagic
+>>> args = {'org_id': 800}
+>>> dm = DeviceMagic(args)
+>>>
+>>> omaha_tablet = 281
+>>> new_device = 543
+>>> old_device = 93
+>>>
+>>> dm.device.all() # All devices in organization
+'<?xml version="1.0" encoding="UTF-8"?>\n<devices type="array">\n  <device>\n    <id>281</id>\n    <identifier>Android_d5c2a564...
+>>>
+>>> dm.device.details(omaha_tablet) # Device details
+'<?xml version="1.0" encoding="UTF-8"?>\n<device>\n  <id>281</id>\n  <identifier>Android_d5c2a564...
+>>>
+>>> dm.device.delete(old_device)
+>>>
+>>> dm.device.approve(new_device)
+>>>
+>>> device_xml = '''<device>
+                        <owner>Audrey</owner>
+                        <description>Abroad helping others</description>
+                        <groups>Outreach</groups>
+                    </device>'''
+>>>
+>>> dm.device.update(new_device, device_xml) # Change device name, description and group(s)
 ```
 
 ### Form
 ```python
->>> dm.form.details(3005)
-{'type': 'root', 'children': [{'identifier': 'Yes_No_Question', 'title': 'Yes/No Question', 'autoIdentifier': True, 'type': 'boolean'}, {'identifier': 'Date_Question', 'title': 'Date Question', 'autoIdentifier': True, 'type': 'date'}...}
+>>> from pydevice import DeviceMagic
+>>> args = {'org_id': 800}
+>>> dm = DeviceMagic(args)
+>>>
+>>> from some_file import form_json, group_json
+>>> site_survey = 400
+>>> old_form = 235
+>>>
+>>> dm.form.all() # All forms in organization
+{'forms': [{'id': 400, 'name': 'Site Survey'...
+>>>
+>>> dm.form.details(site_survey)
+{'type': 'root', 'children': [{'identifier': 'Time_on_site'...
+>>>
+>>> dm.form.create(form_json) # Create a form
+>>>
+>>> dm.form.update(site_survey, form_json)
+>>>
+>>> dm.form.delete(old_form)
+>>>
+>>> dm.form.new_group(site_survey, group_json) # Change form group
 ```
 
 ### Resource
 ```python
->>> dm.resource.update(480,'client_list', 'client_list.xlsx')
-'Resource updated'
+>>> from pydevice import DeviceMagic
+>>> args = {'file_path': 'path/to/material_list.xlsx'}
+>>> dm = DeviceMagic(args)
+>>>
+>>> cost_of_material = 7898
+>>> customer_list = 9789
+>>> old_resource = 6778
+>>>
+>>> dm.resource.all() # All organization resources
+{'resources': [{'id': 6958, 'original_filename': 'Equipment List.xlsx...'}
+>>>
+>>> dm.resource.details(customer_list) 
+{'resource': {'id': 9789, 'identifier': '52945f50-408...'}
+>>>
+>>> dm.resource.download(customer_list) # Download file
+>>>
+>>> dm.resource.create('Copy of all materials', 'material_list.xlsx') # Create a resource
+>>>
+>>> dm.resource.update(cost_of_material, 'With updated pricing', 'cost_of_material.xlsx')
+>>>
+>>> dm.resource.delete(old_resource)
 ```
 
 ### Group
 ```python
->>> dm.group.delete(615)
-'Group deleted'
+>>> from pydevice import DeviceMagic
+>>> args = {'org_id': 400}
+>>> dm = DeviceMagic(args)
+>>>
+>>> from some_file import group_json
+>>> old_group = 879
+>>> technician = 900
+>>>
+>>> dm.group.all() # All organization groups
+{'groups': [{'id': 3643, 'name': 'Engineer', 'form_ids': [...]}
+>>>
+>>> dm.group.create(group_json) # Create a group
+>>>
+>>> dm.group.update(technician, group_json)
+>>>
+>>> dm.group.delete(old_group)
 ```
 
 ### Dispatch
 ```python
->>> import json
->>> dispatch_json = { "form_namespace" : "http://www.devicemagic.com/xforms/4c0a6400-ef90-8283-8586-22000a1ddaf9", 
-                             "payload" : {
-                               "Group" : []
-                        }
-                    }
->>> dispatch_json = json.dumps(dispatch_json)
->>> dm.dispatch.push('iPhone_3945', dispatch_json)
-'Dispatch successful'
+>>> from pydevice import DeviceMagic
+>>> args = {'org_id': 600}
+>>> dm = DeviceMagic(args)
+>>> 
+>>> from some_file import dispatch_json
+>>> new_brunswick_tab = 'Android_d5c2a9db-7c7e-465b'
+>>> ontario_phone = 'iPhone_8775938_48795749'
+>>> service_call = 13434
+>>> old_dispatch = 11947
+>>>
+>>> dm.dispatch.all() # All outstanding dispatches
+'<?xml version="1.0" encoding="UTF-8"?>\n<forms type="array">\n  <form>\n    <id type="integer">72343</id>\n    <name>Daily Inspection</name>\n    <namespace>...'
+>>>
+>>> dm.dispatch.push(new_brunswick, dispatch_json) # Dispatch a form
+>>>
+>>> dm.dispatch.update(new_brunswick, service_call, dispatch_json)
+>>>
+>>> dm.dispatch.delete(ontario_phone, oneshot_id=old_dispatch) # Delete a single dispatch
+>>>
+>>> dm.dispatch.delete(ontario_phone) # Remove all
 ```
 
 [Official Device Magic API docs](https://docs.devicemagic.com/create-custom-integrations-with-our-restapi)
