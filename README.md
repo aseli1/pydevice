@@ -59,7 +59,7 @@ In preference, you can pass the key explicitly:
 >>> dm = DeviceMagic(args)
 >>>
 >>> from some_file import destination_json
->>> docx_to_email = 17443
+>>> docx_to_email = 17443 # Destination id
 >>> google_sheet = 17465
 >>> old_destination = 17432
 >>> new_form = 8475
@@ -86,7 +86,7 @@ In preference, you can pass the key explicitly:
 >>> args = {'org_id': 800}
 >>> dm = DeviceMagic(args)
 >>>
->>> omaha_tablet = 281
+>>> omaha_tablet = 281 # Device id
 >>> new_device = 543
 >>> old_device = 93
 >>>
@@ -116,7 +116,7 @@ In preference, you can pass the key explicitly:
 >>> dm = DeviceMagic(args)
 >>>
 >>> from some_file import form_json, group_json
->>> site_survey = 400
+>>> site_survey = 400 # Form id
 >>> old_form = 235
 >>>
 >>> dm.form.all() # All forms in organization
@@ -140,7 +140,7 @@ In preference, you can pass the key explicitly:
 >>> args = {'file_path': 'path/to/material_list.xlsx'}
 >>> dm = DeviceMagic(args)
 >>>
->>> cost_of_material = 7898
+>>> cost_of_material = 7898 # Resource id
 >>> customer_list = 9789
 >>> old_resource = 6778
 >>>
@@ -166,7 +166,7 @@ In preference, you can pass the key explicitly:
 >>> dm = DeviceMagic(args)
 >>>
 >>> from some_file import group_json
->>> old_group = 879
+>>> old_group = 879 # Group id
 >>> technician = 900
 >>>
 >>> dm.group.all() # All organization groups
@@ -188,7 +188,7 @@ In preference, you can pass the key explicitly:
 >>> from some_file import dispatch_json
 >>> new_brunswick_tab = 'Android_d5c2a9db-7c7e-465b'
 >>> ontario_phone = 'iPhone_8775938_48795749'
->>> service_call = 13434
+>>> service_call = 13434 # Oneshot id
 >>> old_dispatch = 11947
 >>>
 >>> dm.dispatch.all() # All outstanding dispatches
