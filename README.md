@@ -115,7 +115,7 @@ In preference, you can pass the key explicitly:
 >>> args = {'org_id': 800}
 >>> dm = DeviceMagic(args)
 >>>
->>> from some_file import form_json, group_json
+>>> from some_file import group_json
 >>> site_survey = 400 # Form id
 >>> old_form = 235
 >>>
@@ -125,7 +125,10 @@ In preference, you can pass the key explicitly:
 >>> dm.form.details(site_survey)
 {'type': 'root', 'children': [{'identifier': 'Time_on_site'...
 >>>
->>> dm.form.create(form_json) # Create a form
+>>> with open('form.json') as json:
+...     dm.form.create(json.read())
+... 
+'Form created'
 >>>
 >>> dm.form.update(site_survey, form_json)
 >>>

@@ -6,12 +6,12 @@ class Device():
         self.base_url = 'https://www.devicemagic.com/organizations/{0}/devices'.format(self.org_id)
 
     def all(self):
-        request = self.r.get(self.base_url + ".xml")
-        return request.text
+        request = self.r.get(self.base_url + ".json")
+        return request.json()
 
     def details(self, device_id):
-        request = self.r.get(self.base_url + "/"+ str(device_id) + ".xml")
-        return request.text
+        request = self.r.get(self.base_url + "/"+ str(device_id) + ".json")
+        return request.json()
 
     def approve(self, device_id):
         request = self.r.post(self.base_url + "/"+ str(device_id) + "/approve")
@@ -27,9 +27,9 @@ class Device():
         else:
             return "Failed with status code: {0}".format(request.status_code)
 
-    def update(self, device_id, xml):
-        headers = {'Content-Type': 'application/xml'}
-        request = self.r.put(self.base_url + "/" + str(device_id), data=xml, headers=headers)
+    def update(self, device_id, json):
+        headers = {'Content-Type': 'application/json'}
+        request = self.r.put(self.base_url + "/" + str(device_id), data=json, headers=headers)
         if request.status_code >= 200 and request.status_code < 300:
             return "Device updated"
         else:
