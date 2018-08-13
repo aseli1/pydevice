@@ -1,4 +1,4 @@
-# pydevice
+`# pydevice
 Python interface for the Device Magic API
 
 ## Installation
@@ -91,22 +91,24 @@ In preference, you can pass the key explicitly:
 >>> old_device = 93
 >>>
 >>> dm.device.all() # All devices in organization
-'<?xml version="1.0" encoding="UTF-8"?>\n<devices type="array">\n  <device>\n    <id>281</id>\n    <identifier>Android_d5c2a564...
+{'devices': [{'id': 281, 'identifier': 'Android_d5c2a9d...
 >>>
 >>> dm.device.details(omaha_tablet) # Device details
-'<?xml version="1.0" encoding="UTF-8"?>\n<device>\n  <id>281</id>\n  <identifier>Android_d5c2a564...
+{'id': 281, 'identifier': 'Android_d5c2a9d...
 >>>
 >>> dm.device.delete(old_device)
 >>>
 >>> dm.device.approve(new_device)
 >>>
->>> device_xml = '''<device>
-                        <owner>Audrey</owner>
-                        <description>Abroad helping others</description>
-                        <groups>Outreach</groups>
-                    </device>'''
+>>> device_json = {
+        'device':{
+            'owner':'Audrey',
+            'description':'Abroad helping others',
+            'groups':'Outreach'
+        }
+    }
 >>>
->>> dm.device.update(new_device, device_xml) # Change device name, description and group(s)
+>>> dm.device.update(new_device, device_json) # Change device name, description and group(s)
 ```
 
 ### Form
