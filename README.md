@@ -1,4 +1,4 @@
-`# pydevice
+# pydevice
 Python interface for the Device Magic API
 
 ## Installation
