@@ -41,7 +41,6 @@ In preference, you can pass the key explicitly:
 
 ### Database
 ```python
->>> from pydevice import DeviceMagic
 >>> args = {'database_id': 500}
 >>> dm = DeviceMagic(args)
 >>>
@@ -54,7 +53,6 @@ In preference, you can pass the key explicitly:
 
 ### Destination
 ```python
->>> from pydevice import DeviceMagic
 >>> args = {'form_id': 700}
 >>> dm = DeviceMagic(args)
 >>>
@@ -82,7 +80,6 @@ In preference, you can pass the key explicitly:
 
 ### Device
 ```python
->>> from pydevice import DeviceMagic
 >>> args = {'org_id': 800}
 >>> dm = DeviceMagic(args)
 >>>
@@ -113,7 +110,6 @@ In preference, you can pass the key explicitly:
 
 ### Form
 ```python
->>> from pydevice import DeviceMagic
 >>> args = {'org_id': 800}
 >>> dm = DeviceMagic(args)
 >>>
@@ -141,7 +137,6 @@ In preference, you can pass the key explicitly:
 
 ### Resource
 ```python
->>> from pydevice import DeviceMagic
 >>> args = {'file_path': 'path/to/material_list.xlsx'}
 >>> dm = DeviceMagic(args)
 >>>
@@ -166,7 +161,6 @@ In preference, you can pass the key explicitly:
 
 ### Group
 ```python
->>> from pydevice import DeviceMagic
 >>> args = {'org_id': 400}
 >>> dm = DeviceMagic(args)
 >>>
@@ -186,7 +180,6 @@ In preference, you can pass the key explicitly:
 
 ### Dispatch
 ```python
->>> from pydevice import DeviceMagic
 >>> args = {'org_id': 600}
 >>> dm = DeviceMagic(args)
 >>> 
@@ -197,7 +190,7 @@ In preference, you can pass the key explicitly:
 >>> old_dispatch = 11947
 >>>
 >>> dm.dispatch.all() # All outstanding dispatches
-'<?xml version="1.0" encoding="UTF-8"?>\n<forms type="array">\n  <form>\n    <id type="integer">72343</id>\n    <name>Daily Inspection</name>\n    <namespace>...'
+'[{"form": {"id": 72343, "name": "Daily Inspection","namespace"...'
 >>>
 >>> dm.dispatch.push(new_brunswick, dispatch_json) # Dispatch a form
 >>>
