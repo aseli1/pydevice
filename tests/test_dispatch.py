@@ -7,12 +7,12 @@ dm = test_object
 @vcr.use_cassette('tests/cassettes/dispatch/all_without_device')
 def test_all_without_device():
     response = dm.dispatch.all()
-    assert isinstance(response, str)
+    assert isinstance(response, list)
 
 @vcr.use_cassette('tests/cassettes/dispatch/all_with_device')
 def test_all_with_device():
     response = dm.dispatch.all(device_identifier=test_dispatch['device_identifier'])
-    assert isinstance(response, str)
+    assert isinstance(response, list)
 
 @vcr.use_cassette('tests/cassettes/dispatch/push')
 def test_push():

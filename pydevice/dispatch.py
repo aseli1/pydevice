@@ -8,11 +8,11 @@ class Dispatch():
 
     def all(self, device_identifier=None):
         if device_identifier != None:
-            url = self.device_base_url + "/" + device_identifier + "/oneshots"
+            url = self.device_base_url + "/" + device_identifier + "/oneshots.json"
         else:
-            url = self.org_base_url + "/" + self.org_id + "/oneshots"
+            url = self.org_base_url + "/" + self.org_id + "/oneshots.json"
         request = self.r.get(url)
-        return request.text
+        return request.json()
 
     def push(self, device_identifier, json):
         headers = {'Content-Type': 'application/json'}  
