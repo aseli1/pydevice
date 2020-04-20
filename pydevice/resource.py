@@ -15,7 +15,7 @@ class Resource():
 
     def download(self, resource_id):
         request = self.r.get(self.base_url + "/" + str(resource_id))
-        return request.text
+        return request.content
 
     def details(self, resource_id):
         request = self.r.get(self.base_url + "/"+ str(resource_id) + "/describe.json")
