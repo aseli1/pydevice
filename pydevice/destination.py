@@ -20,10 +20,10 @@ class Destination():
             url = "https://www.devicemagic.com/api/forms/{0}/destinations".format(form_id)
         else:
             url = self.base_url
-        headers = {'Content-Type': 'application/json'}    
+        headers = {'Content-Type': 'application/json'}
         request = self.r.post(url, data=json, headers=headers)
         if request.status_code >= 200 and request.status_code < 300:
-            return "Destination created"
+            return request.json()
         else:
             return "Failed with status code: {0}".format(request.status_code)
 
@@ -31,7 +31,7 @@ class Destination():
         headers = {'Content-Type': 'application/json'}
         request = self.r.put(self.base_url + "/" + str(destination_id) + ".json", data=json, headers=headers)
         if request.status_code >= 200 and request.status_code < 300:
-            return "Destination updated"
+            return request.json()
         else:
             return "Failed with status code: {0}".format(request.status_code)
 
