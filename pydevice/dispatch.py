@@ -18,7 +18,7 @@ class Dispatch():
         headers = {'Content-Type': 'application/json'}
         request = self.r.post(self.device_base_url + "/" + device_identifier + "/dispatches", data=json, headers=headers)
         if request.status_code >= 200 and request.status_code < 300:
-            return r.json()
+            return request.json()
         else:
             return "Failed with status code: {0}".format(request.status_code)
 
@@ -26,7 +26,7 @@ class Dispatch():
         headers = {'Content-Type': 'application/json'}
         request = self.r.patch(self.device_base_url + "/" + device_identifier + "/dispatches/" + str(dispatch_id), data=json, headers=headers)
         if request.status_code >= 200 and request.status_code < 300:
-            return r.json()
+            return request.json()
         else:
             return "Failed with status code: {0}".format(request.status_code)
 
