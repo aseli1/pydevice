@@ -14,10 +14,10 @@ class Form():
         return request.json()
 
     def create(self, json):
-        headers = {'Content-Type': 'application/json'}    
+        headers = {'Content-Type': 'application/json'}
         request = self.r.post(self.base_url, data=json, headers=headers)
         if request.status_code >= 200 and request.status_code < 300:
-            return "Form created"
+            return request.json()
         else:
             return "Failed with status code: {0}".format(request.status_code)
 
@@ -25,7 +25,7 @@ class Form():
         headers = {'Content-Type': 'application/json'}
         request = self.r.put(self.base_url + "/" + str(form_id), data=json, headers=headers)
         if request.status_code >= 200 and request.status_code < 300:
-            return "Form updated"
+            return request.json()
         else:
             return "Failed with status code: {0}".format(request.status_code)
 
