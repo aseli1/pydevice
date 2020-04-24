@@ -26,7 +26,7 @@ class Resource():
 
     def __encode_local_file(self):
         with open(self.file_path, "rb") as resource_file:
-            self.encoded_file = self.__encoded_file(resource_file.read())
+            self.encoded_file = self.__encode_file(resource_file.read())
 
     def create(self, description, file_name, file_data=None, content_type=None):
         if file_data == None:
