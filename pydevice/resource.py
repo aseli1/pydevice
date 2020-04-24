@@ -22,11 +22,11 @@ class Resource():
         return request.json()
 
     def __encode_file(self, file):
-        return base64.b64encode(file.read()).decode('utf-8')
+        return base64.b64encode(file).decode('utf-8')
 
     def __encode_local_file(self):
         with open(self.file_path, "rb") as resource_file:
-            self.encoded_file = self.__encoded_file(resource_file)
+            self.encoded_file = self.__encoded_file(resource_file.read())
 
     def create(self, description, file_name, file_data=None, content_type=None):
         if file_data == None:
@@ -61,9 +61,9 @@ class Resource():
     def clone_xlsx(self, resource_id, description=None, file_name=None):
         file = self.download(resource_id)
         file_data = self.__encode_file(file)
-        description = description or "clone {0}".format(self.details(resource_id)["resource"]["description"])
-        file_name = file_name or "clone {0}".format(self.details(resource_id)["resource"]["original_filename"])
-        return create(description, file_name, file_data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"):
+        description = description or "CLONE - {0}".format(self.details(resource_id)["resource"]["description"])
+        file_name = file_name or "CLONE - {0}".format(self.details(resource_id)["resource"]["original_filename"])
+        return self.create(description, file_name, file_data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 
     def delete(self, resource_id):
         request = self.r.delete(self.base_url + "/" + str(resource_id))
