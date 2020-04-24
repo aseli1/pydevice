@@ -16,7 +16,8 @@ class Dispatch():
 
     def push(self, device_identifier, json):
         headers = {'Content-Type': 'application/json'}
-        request = self.r.post(self.device_base_url + "/" + device_identifier + "/dispatches", data=json, headers=headers)
+        request = self.r.post(self.device_base_url + "/" + device_identifier \
+                  + "/dispatches.json", data=json, headers=headers)
         if request.status_code >= 200 and request.status_code < 300:
             return request.json()
         else:
@@ -24,7 +25,8 @@ class Dispatch():
 
     def update(self, device_identifier, dispatch_id, json):
         headers = {'Content-Type': 'application/json'}
-        request = self.r.patch(self.device_base_url + "/" + device_identifier + "/dispatches/" + str(dispatch_id), data=json, headers=headers)
+        request = self.r.patch(self.device_base_url + "/" + device_identifier \
+                  + "/dispatches/" + str(dispatch_id) + ".json", data=json, headers=headers)
         if request.status_code >= 200 and request.status_code < 300:
             return request.json()
         else:
