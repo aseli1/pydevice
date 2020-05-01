@@ -1,27 +1,24 @@
 class Database():
 
-    def __init__(self, session, database_id):
+    def __init__(self, session, id):
         self.r = session
-        self.database_id = database_id
-        self.base_url = 'https://www.devicemagic.com/api/forms/{0}/device_magic_database.json'.format(self.database_id)
+        self.id = id
+        self.base_url = ''' https://www.devicemagic.com/api/forms
+                            /{0}/device_magic_database.json '''.format(self.id)
 
     def json(self, *args):
-        return self.__request_with_params(args) if args else self.__simple_request()
-    
-    def __simple_request(self):
-        request = self.r.get(self.base_url) # For all submissions within the Device Magic Database
-        return request.json()
+        return self.__filtered_query(args) if args else self.__basic_query()
+
+    def __basic_query(self):
+        request = self.r.get(self.base_url)  # For all submissions within the
+        return request.json()                # Device Magic Database
 
     def __join_params(self, parameters):
-        params = [ param.strip() for param in parameters ]
+        params = [param.strip() for param in parameters]
         params_for_url = "?" + "&".join(params)
         return params_for_url
 
-    def __request_with_params(self, parameters):
+    def __filtered_query(self, parameters):
         params = self.__join_params(parameters)
         request = self.r.get(self.base_url + params)
         return request.json()
-
-
-
-
