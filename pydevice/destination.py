@@ -6,8 +6,8 @@ class Destination():
     def __init__(self, session, form_id):
         self.r = session
         self.form_id = form_id
-        self.base_url = ''' https://www.devicemagic.com/api/forms/
-                           {0}/destinations '''.format(self.form_id)
+        self.base_url = "https://www.devicemagic.com/api/forms/"\
+                        "{0}/destinations".format(self.form_id)
 
     def all(self):
         request = self.r.get(self.base_url + ".json")

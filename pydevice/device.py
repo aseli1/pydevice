@@ -3,8 +3,8 @@ class Device():
     def __init__(self, session, org_id):
         self.r = session
         self.org_id = org_id
-        self.base_url = ''' https://www.devicemagic.com/organizations/
-                            {0}/devices '''.format(self.org_id)
+        self.base_url = "https://www.devicemagic.com/organizations/"\
+                        "{0}/devices".format(self.org_id)
 
     def all(self):
         request = self.r.get(self.base_url + ".json")
