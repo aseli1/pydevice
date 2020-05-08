@@ -19,9 +19,9 @@ class Destination():
         return request.json()
 
     def create(self, json, form_id=None):
-        if form_id != None:
-            url = ''' https://www.devicemagic.com/api/
-                      forms/{0}/destinations '''.format(form_id)
+        if form_id is not None:
+            url = "https://www.devicemagic.com/api/"\
+                  "forms/{0}/destinations".format(form_id)
         else:
             url = self.base_url
         headers = {'Content-Type': 'application/json'}
