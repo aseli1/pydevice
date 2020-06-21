@@ -24,7 +24,8 @@ def test_create():
 
 @vcr.use_cassette('tests/cassettes/destination/update')
 def test_update():
-    response = dm.destination.update(test_destination['update_id'], test_destination['update_json'])
+    response = dm.destination.update(
+        test_destination['update_id'], test_destination['update_json'])
     assert isinstance(response, dict)
 
 
