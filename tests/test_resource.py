@@ -1,4 +1,3 @@
-from pydevice import DeviceMagic
 from .test_object import test_object, test_resource
 import vcr
 
@@ -12,7 +11,7 @@ def test_all():
 @vcr.use_cassette('tests/cassettes/resource/download')
 def test_download():
     response = dm.resource.download(test_resource['download_id'])
-    assert isinstance(response, str)
+    assert isinstance(response, bytes)
 
 @vcr.use_cassette('tests/cassettes/resource/details')
 def test_details():
@@ -22,12 +21,12 @@ def test_details():
 @vcr.use_cassette('tests/cassettes/resource/create')
 def test_create():
     response = dm.resource.create('test_resource', 'test_resource.xlsx')
-    assert response == 'Resource created'
+    assert isinstance(response, dict)
 
 @vcr.use_cassette('tests/cassettes/resource/update')
 def test_update():
     response = dm.resource.update(test_resource['update_id'],'test_resource', 'test_resource.xlsx')
-    assert response == 'Resource updated'
+    assert isinstance(response, dict)
 
 @vcr.use_cassette('tests/cassettes/resource/delete')
 def test_delete():

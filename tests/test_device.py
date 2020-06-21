@@ -27,5 +27,4 @@ def test_update():
 @vcr.use_cassette('tests/cassettes/device/delete')
 def test_delete():
     response = dm.device.delete(test_device['update_id'])
-    assert response == 'Device deleted' 
-      
+    assert response == 'Device deleted'

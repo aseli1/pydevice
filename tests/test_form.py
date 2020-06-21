@@ -17,12 +17,12 @@ def test_details():
 @vcr.use_cassette('tests/cassettes/form/create')
 def test_create():
     response = dm.form.create(test_form['sample_form'])
-    assert response == 'Form created'
+    assert isinstance(response, dict)
 
 @vcr.use_cassette('tests/cassettes/form/update')
 def test_update():
     response = dm.form.update(test_form['form_id'], test_form['sample_form'])
-    assert response == 'Form updated'
+    assert isinstance(response, dict)
 
 @vcr.use_cassette('tests/cassettes/form/delete')
 def test_delete():
