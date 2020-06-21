@@ -28,6 +28,16 @@ def test_create():
     assert isinstance(response, dict)
 
 
+@vcr.use_cassette('tests/cassettes/resource/clone_xlsx')
+def test_clone_xlsx_without_params():
+    response = dm.resource.clone_xlsx(test_resource['update_id'])
+    filename = response['resource']['original_filename']
+    description = response['resource']['description']
+    assert isinstance(response, dict)
+    assert filename == 'CLONE - new_resource.xlsx'
+    assert description == 'CLONE - new_resource'
+
+
 @vcr.use_cassette('tests/cassettes/resource/update')
 def test_update():
     response = dm.resource.update(

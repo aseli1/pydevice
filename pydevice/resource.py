@@ -61,7 +61,7 @@ class Resource():
                                       "content_type": content_type}}}
         request = self.r.put(self.base_url + "/" + str(resource_id), json=json)
         if request.status_code >= 200 and request.status_code < 300:
-            return r.json()
+            return request.json()
         else:
             return "Failed with status code: {0}".format(request.status_code)
 
@@ -72,8 +72,8 @@ class Resource():
             self.details(resource_id)["resource"]["description"])
         file_name = file_name or "CLONE - {0}".format(
             self.details(resource_id)["resource"]["original_filename"])
-        mimetype = ''' application/vnd.openxmlformats-
-                       officedocument.spreadsheetml.sheet '''
+        mimetype = ("application/vnd.openxmlformats-"
+                    "officedocument.spreadsheetml.sheet")
         return self.create(description, file_name, file_data, mimetype)
 
     def delete(self, resource_id):

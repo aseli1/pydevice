@@ -8,6 +8,7 @@ from .dispatch import Dispatch
 from .auth import DeviceMagicAuth
 import requests
 
+
 class DeviceMagic():
 
     def __init__(self, args={}):
