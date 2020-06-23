@@ -65,15 +65,13 @@ class Resource():
         else:
             return "Failed with status code: {0}".format(request.status_code)
 
-    def clone_xlsx(self, resource_id, description=None, file_name=None):
+    def clone(self, resource_id, mimetype, description=None, file_name=None):
         file = self.download(resource_id)
         file_data = self.__encode_file(file)
         description = description or "CLONE - {0}".format(
             self.details(resource_id)["resource"]["description"])
         file_name = file_name or "CLONE - {0}".format(
             self.details(resource_id)["resource"]["original_filename"])
-        mimetype = ("application/vnd.openxmlformats-"
-                    "officedocument.spreadsheetml.sheet")
         return self.create(description, file_name, file_data, mimetype)
 
     def delete(self, resource_id):

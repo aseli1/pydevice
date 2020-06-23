@@ -28,14 +28,30 @@ def test_create():
     assert isinstance(response, dict)
 
 
-@vcr.use_cassette('tests/cassettes/resource/clone_xlsx')
-def test_clone_xlsx_without_params():
-    response = dm.resource.clone_xlsx(test_resource['update_id'])
+@vcr.use_cassette('tests/cassettes/resource/clone_without_params')
+def test_clone_without_params():
+    response = dm.resource.clone(
+        test_resource['update_id'],
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
     filename = response['resource']['original_filename']
     description = response['resource']['description']
     assert isinstance(response, dict)
-    assert filename == 'CLONE - new_resource.xlsx'
-    assert description == 'CLONE - new_resource'
+    assert filename == 'CLONE - test_resource.xlsx'
+    assert description == 'CLONE - test_resource'
+
+
+@vcr.use_cassette('tests/cassettes/resource/clone_with_params')
+def test_clone_with_params():
+    response = dm.resource.clone(
+        test_resource['update_id'],
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        description='cloned_file',
+        file_name='cloned_file.xlsx')
+    filename = response['resource']['original_filename']
+    description = response['resource']['description']
+    assert isinstance(response, dict)
+    assert filename == 'cloned_file.xlsx'
+    assert description == 'cloned_file'
 
 
 @vcr.use_cassette('tests/cassettes/resource/update')
