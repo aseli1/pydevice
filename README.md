@@ -125,7 +125,7 @@ In preference, you can pass the key explicitly:
 >>>
 >>> with open('form.json') as json:
 ...     dm.form.create(json.read())
-... 
+...
 'Form created'
 >>>
 >>> dm.form.update(site_survey, form_json)
@@ -143,18 +143,24 @@ In preference, you can pass the key explicitly:
 >>> cost_of_material = 7898 # Resource id
 >>> customer_list = 9789
 >>> old_resource = 6778
+>>> file_as_string = 'eyJub3J0aCI6IjM4L...'
+>>> mime = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
 >>>
 >>> dm.resource.all() # All organization resources
 {'resources': [{'id': 6958, 'original_filename': 'Equipment List.xlsx...'}
 >>>
->>> dm.resource.details(customer_list) 
+>>> dm.resource.details(customer_list)
 {'resource': {'id': 9789, 'identifier': '52945f50-408...'}
 >>>
 >>> dm.resource.download(customer_list) # Download file
 >>>
 >>> dm.resource.create('Copy of all materials', 'material_list.xlsx') # Create a resource
 >>>
+>>> dm.resource.create('Copy of all materials', 'material_list.xlsx', file_as_string, mime) # Pass a file as a string
+>>>
 >>> dm.resource.update(cost_of_material, 'With updated pricing', 'cost_of_material.xlsx')
+>>>
+>>> dm.resource.clone(cost_of_material, mime) # Clone an existing resource
 >>>
 >>> dm.resource.delete(old_resource)
 ```
@@ -182,7 +188,7 @@ In preference, you can pass the key explicitly:
 ```python
 >>> args = {'org_id': 600}
 >>> dm = DeviceMagic(args)
->>> 
+>>>
 >>> from some_file import dispatch_json
 >>> new_brunswick_tab = 'Android_d5c2a9db-7c7e-465b'
 >>> ontario_phone = 'iPhone_8775938_48795749'
