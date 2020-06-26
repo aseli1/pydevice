@@ -7,7 +7,7 @@ class Resource():
     def __init__(self, session, file_path):
         self.r = session
         self.file_path = file_path
-        self.base_url = 'https://www.devicemagic.com/api/resources'
+        self.base_url = "https://www.devicemagic.com/api/resources"
         if self.file_path is not None:
             self.content_type = mimetypes.guess_type(self.file_path)
         else:
@@ -27,7 +27,7 @@ class Resource():
         return request.json()
 
     def __encode_file(self, file):
-        return base64.b64encode(file).decode('utf-8')
+        return base64.b64encode(file).decode("utf-8")
 
     def __encode_local_file(self):
         with open(self.file_path, "rb") as resource_file:
@@ -59,7 +59,8 @@ class Resource():
                              "file": {"file_name": file_name,
                                       "file_data": data,
                                       "content_type": content_type}}}
-        request = self.r.put(self.base_url + "/" + str(resource_id), json=json)
+        request = self.r.put(
+            self.base_url + "/" + str(resource_id) + ".json", json=json)
         if request.status_code >= 200 and request.status_code < 300:
             return request.json()
         else:

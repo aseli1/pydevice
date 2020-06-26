@@ -54,10 +54,19 @@ def test_clone_with_params():
     assert description == 'cloned_file'
 
 
-@vcr.use_cassette('tests/cassettes/resource/update')
-def test_update():
+@vcr.use_cassette('tests/cassettes/resource/file_from_path_update')
+def test_file_from_path_update():
     response = dm.resource.update(
         test_resource['update_id'], 'test_resource', 'test_resource.xlsx')
+    assert isinstance(response, dict)
+
+
+@vcr.use_cassette('tests/cassettes/resource/file_param_update')
+def test_file_param_update():
+    response = dm.resource.update(
+        test_resource['update_id'], 'test_resource', 'test_resource.xlsx',
+        test_resource['file_data'],
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
     assert isinstance(response, dict)
 
 
