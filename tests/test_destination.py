@@ -16,9 +16,15 @@ def test_details():
     assert isinstance(response, dict)
 
 
-@vcr.use_cassette('tests/cassettes/destination/create')
-def test_create():
+@vcr.use_cassette('tests/cassettes/destination/create_without_form_id')
+def test_create_without_form_id():
     response = dm.destination.create(test_destination['create_json'])
+    assert isinstance(response, dict)
+
+@vcr.use_cassette('tests/cassettes/destination/create_with_form_id')
+def test_create_with_form_id():
+    response = dm.destination.create(test_destination['create_json'],
+                                     test_destination['form_id'])
     assert isinstance(response, dict)
 
 
@@ -38,4 +44,4 @@ def test_delete():
 @vcr.use_cassette('tests/cassettes/destination/copy')
 def test_copy():
     response = dm.destination.copy(test_destination['copy_id'])
-    assert response == "Destination created"
+    assert isinstance(response, dict)

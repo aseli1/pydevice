@@ -21,9 +21,9 @@ class Destination():
     def create(self, json, form_id=None):
         if form_id is not None:
             url = "https://www.devicemagic.com/api/"\
-                  "forms/{0}/destinations".format(form_id)
+                  "forms/{0}/destinations.json".format(form_id)
         else:
-            url = self.base_url
+            url = self.base_url + ".json"
         headers = {'Content-Type': 'application/json'}
         request = self.r.post(url, data=json, headers=headers)
         if request.status_code >= 200 and request.status_code < 300:
