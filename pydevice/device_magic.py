@@ -1,10 +1,3 @@
-from .database import Database
-from .destination import Destination
-from .device import Device
-from .form import Form
-from .resource import Resource
-from .group import Group
-from .dispatch import Dispatch
 from .auth import DeviceMagicAuth
 import requests
 
@@ -22,10 +15,38 @@ class DeviceMagic():
         self.resource_id = str(args.get('resource_id'))
         self.file_path = args.get('file_path')
         self.device_identifier = args.get('device_identifier')
-        self.database = Database(session, self.database_id)
-        self.destination = Destination(session, self.form_id)
-        self.device = Device(session, self.org_id)
-        self.form = Form(session, self.org_id)
-        self.resource = Resource(session, self.file_path)
-        self.group = Group(session, self.org_id)
-        self.dispatch = Dispatch(session, self.org_id)
+
+    @property
+    def resource(self):
+        from .resource import Resource
+        return Resource(self.session, self.file_path)
+
+    @property
+    def database(self):
+        from .database import Database
+        return Database(self.session, self.database_id)
+
+    @property
+    def destination(self):
+        from .destination import Destination
+        return Destination(self.session, self.form_id)
+
+    @property
+    def device(self):
+        from .device import Device
+        return Device(self.session, self.org_id)
+
+    @property
+    def form(self):
+        from .form import Form
+        return Form(self.session, self.org_id)
+
+    @property
+    def group(self):
+        from .group import Group
+        return Group(self.session, self.org_id)
+
+    @property
+    def dispatch(self):
+        from .dispatch import Dispatch
+        return Dispatch(self.session, self.org_id)
