@@ -156,9 +156,9 @@ In preference, you can pass the key explicitly:
 >>>
 >>> dm.resource.create('Copy of all materials', 'material_list.xlsx') # Create a resource
 >>>
->>> dm.resource.create('Copy of all materials', 'material_list.xlsx', file_as_string, mime) # Pass a file as a string
+>>> dm.resource.create('Copy of all materials', 'material_list.xlsx', file_as_string, mime) # Pass a file directly
 >>>
->>> dm.resource.update(cost_of_material, 'With updated pricing', 'cost_of_material.xlsx')
+>>> dm.resource.update(cost_of_material, 'With updated pricing', 'cost_of_material.xlsx') # Optionally, pass a file
 >>>
 >>> dm.resource.clone(cost_of_material, mime) # Clone an existing resource
 >>>
