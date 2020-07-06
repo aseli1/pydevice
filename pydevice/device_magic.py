@@ -23,17 +23,17 @@ class DeviceMagic():
     @property
     def database(self):
         from .database import Database
-        return Database(self.session, self.database_id)
+        return Database(self.connector, self.database_id)
 
     @property
     def destination(self):
         from .destination import Destination
-        return Destination(self.session, self.form_id)
+        return Destination(self.connector, self.form_id)
 
     @property
     def device(self):
         from .device import Device
-        return Device(self.session, self.org_id)
+        return Device(self.connector, self.org_id)
 
     @property
     def form(self):
@@ -48,7 +48,7 @@ class DeviceMagic():
     @property
     def dispatch(self):
         from .dispatch import Dispatch
-        return Dispatch(self.session, self.org_id)
+        return Dispatch(self.connector, self.org_id)
 
     @property
     def connector(self):

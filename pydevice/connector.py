@@ -34,7 +34,7 @@ class Connector(object):
 
     def _patch(self, path, data, headers):
         self.r.headers.update(headers)
-        request = self.r.patch(path, data=data, headers=self.headers)
+        request = self.r.patch(path, data=data, headers=self.r.headers)
         return request.json()
 
     def _delete(self, path):
