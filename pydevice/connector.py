@@ -7,7 +7,7 @@ class Connector(object):
     def execute_request(self, path, method,
                         data=None, headers={}, return_json=True):
         if method == 'GET':
-            return self._get(path)
+            return self._get(path, return_json)
         elif method == 'POST':
             return self._post(path, data, headers, return_json)
         elif method == 'PUT':
@@ -19,9 +19,9 @@ class Connector(object):
         else:
             return "pizza"
 
-    def _get(self, path):
+    def _get(self, path, return_json=True):
         request = self.r.get(path + ".{}".format(self.FORMAT))
-        return request.json()
+        return request.json() if return_json else request
 
     def _post(self, path, data, headers, return_json=True):
         self.r.headers.update(headers)

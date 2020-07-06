@@ -4,80 +4,80 @@ import mimetypes
 
 class Resource():
 
-    def __init__(self, session, file_path):
-        self.r = session
+    def __init__(self, connector, file_path):
+        self.connector = connector
         self.file_path = file_path
-        self.base_url = "https://www.devicemagic.com/api/resources"
+        self.base_url = 'https://www.devicemagic.com/api/resources'
         if self.file_path is not None:
             self.content_type = mimetypes.guess_type(self.file_path)
         else:
             self.content_type = None
 
     def all(self):
-        request = self.r.get(self.base_url + ".json")  # To get an overview
-        return request.json()                          # of all the resources
+        path = self.base_url
+        request = self.connector.execute_request(path, 'GET')
+        return request
 
     def download(self, resource_id):
-        request = self.r.get(self.base_url + "/" + str(resource_id))
+        path = self.base_url + '/' + str(resource_id)
+        request = self.connector.execute_request(
+            path, 'GET', return_json=False)
         return request.content
 
     def details(self, resource_id):
-        request = self.r.get(self.base_url + "/"
-                             + str(resource_id) + "/describe.json")
-        return request.json()
+        path = self.base_url + '/' + str(resource_id) + '/describe'
+        request = self.connector.execute_request(path, 'GET')
+        return request
 
-    def __encode_file(self, file):
-        return base64.b64encode(file).decode("utf-8")
+    def _encode_file(self, file):
+        return base64.b64encode(file).decode('utf-8')
 
-    def __encode_local_file(self):
-        with open(self.file_path, "rb") as resource_file:
-            self.encoded_file = self.__encode_file(resource_file.read())
+    def _encode_local_file(self):
+        with open(self.file_path, 'rb') as resource_file:
+            self.encoded_file = self._encode_file(resource_file.read())
 
     def create(self, description, file_name,
                file_data=None, content_type=None):
         if file_data is None:
-            self.__encode_local_file()
+            self._encode_local_file()
         data = file_data or self.encoded_file
         content_type = content_type or self.content_type
-        json = {"resource": {"description": description,
-                             "file": {"file_name": file_name,
-                                      "file_data": data,
-                                      "content_type": content_type}}}
-        request = self.r.post(self.base_url + ".json", json=json)
-        if request.status_code >= 200 and request.status_code < 300:
-            return request.json()
-        else:
-            return "Failed with status code: {0}".format(request.status_code)
+        json = {'resource': {'description': description,
+                             'file': {'file_name': file_name,
+                                      'file_data': data,
+                                      'content_type': content_type}}}
+        path = self.base_url
+        request = self.connector.execute_request(path, 'POST', data=json)
+        return request
 
     def update(self, resource_id, description,
                file_name, file_data=None, content_type=None):
         if file_data is None:
-            self.__encode_local_file()
+            self._encode_local_file()
         data = file_data or self.encoded_file
         content_type = content_type or self.content_type
-        json = {"resource": {"description": description,
-                             "file": {"file_name": file_name,
-                                      "file_data": data,
-                                      "content_type": content_type}}}
-        request = self.r.put(
-            self.base_url + "/" + str(resource_id) + ".json", json=json)
-        if request.status_code >= 200 and request.status_code < 300:
-            return request.json()
-        else:
-            return "Failed with status code: {0}".format(request.status_code)
+        json = {'resource': {'description': description,
+                             'file': {'file_name': file_name,
+                                      'file_data': data,
+                                      'content_type': content_type}}}
+        path = self.base_url + '/' + str(resource_id)
+        request = self.connector.execute_request(path, 'PUT', data=json)
+        return request
 
     def clone(self, resource_id, mimetype, description=None, file_name=None):
         file = self.download(resource_id)
-        file_data = self.__encode_file(file)
-        description = description or "CLONE - {0}".format(
-            self.details(resource_id)["resource"]["description"])
-        file_name = file_name or "CLONE - {0}".format(
-            self.details(resource_id)["resource"]["original_filename"])
+        file_data = self._encode_file(file)
+        description = description or 'CLONE - {0}'.format(
+            self.details(resource_id)['resource']['description'])
+        file_name = file_name or 'CLONE - {0}'.format(
+            self.details(resource_id)['resource']['original_filename'])
         return self.create(description, file_name, file_data, mimetype)
 
     def delete(self, resource_id):
-        request = self.r.delete(self.base_url + "/" + str(resource_id))
+        path = self.base_url + '/' + str(resource_id)
+        request = self.connector.execute_request(
+            path, 'DELETE', return_json=False)
         if request.status_code >= 200 and request.status_code < 300:
-            return "Resource deleted"
+            return 'Resource deleted'
         else:
-            return "Failed with status code: {0}".format(request.status_code)
+            return 'Failed with status code: {0}'.format(request.status_code)

@@ -6,9 +6,8 @@ class DeviceMagic():
 
     def __init__(self, args={}):
         self.api_key = args.get('api_key')
-        session = requests.Session()
-        session.auth = DeviceMagicAuth(self.api_key)
-        self.session = session
+        self.session = requests.Session()
+        self.session.auth = DeviceMagicAuth(self.api_key)
         self.form_id = str(args.get('form_id'))
         self.database_id = str(args.get('database_id'))
         self.org_id = str(args.get('org_id'))
@@ -19,7 +18,7 @@ class DeviceMagic():
     @property
     def resource(self):
         from .resource import Resource
-        return Resource(self.session, self.file_path)
+        return Resource(self.connector, self.file_path)
 
     @property
     def database(self):
