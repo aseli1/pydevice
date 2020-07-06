@@ -23,23 +23,23 @@ class Device():
         request = self.connector.execute_request(
             path, 'POST', return_json=False)
         if request.status_code >= 200 and request.status_code < 300:
-            return "Device approved"
+            return 'Device approved'
         else:
-            return "Failed with status code: {0}".format(request.status_code)
+            return 'Failed with status code: {0}'.format(request.status_code)
 
     def delete(self, device_id):
         path = self.base_url + '/' + str(device_id)
         request = self.connector.execute_request(path, 'DELETE')
         if request.status_code >= 200 and request.status_code < 300:
-            return "Device deleted"
+            return 'Device deleted'
         else:
-            return "Failed with status code: {0}".format(request.status_code)
+            return 'Failed with status code: {0}'.format(request.status_code)
 
     def update(self, device_id, json):
         path = self.base_url + '/' + str(device_id)
         request = self.connector.execute_request(
             path, 'PUT', data=json, headers=self.headers, return_json=False)
         if request.status_code >= 200 and request.status_code < 300:
-            return "Device updated"
+            return 'Device updated'
         else:
-            return "Failed with status code: {0}".format(request.status_code)
+            return 'Failed with status code: {0}'.format(request.status_code)

@@ -49,9 +49,9 @@ class Destination():
 
     def copy(self, destination_id, form_id=None):
         destination_to_copy = self.details(destination_id)
-        format = destination_to_copy["destination"]["format_type"]
-        transport = destination_to_copy["destination"]["transport_type"]
-        binary = destination_to_copy["destination"]["binary_transport_type"]
+        format = destination_to_copy['destination']['format_type']
+        transport = destination_to_copy['destination']['transport_type']
+        binary = destination_to_copy['destination']['binary_transport_type']
         destination_elements = [format, transport, binary]
         self._remove_keys(destination_elements, destination_to_copy)
         new_destination_json = self._format_destination_json(
@@ -63,23 +63,23 @@ class Destination():
         for element in destination_elements:
             if element is None:
                 continue
-            del json["destination"][element]["id"]
-            del json["destination"][element]["created_at"]
-            del json["destination"][element]["updated_at"]
+            del json['destination'][element]['id']
+            del json['destination'][element]['created_at']
+            del json['destination'][element]['updated_at']
 
     def _format_destination_json(self, destination_to_copy,
                                   format, transport, binary):
         new_json = {}
-        new_json["destination"] = {}
-        new_json["destination"]["description"] = \
-            destination_to_copy["destination"]["description"]
-        new_json["destination"]["format_selection"] = format
-        new_json["destination"]["transport_selection"] = transport
-        new_json["destination"]["binary_transport_selection"] = binary
-        new_json[format] = destination_to_copy["destination"][format]
-        new_json[transport] = destination_to_copy["destination"][transport]
+        new_json['destination'] = {}
+        new_json['destination']['description'] = \
+            destination_to_copy['destination']['description']
+        new_json['destination']['format_selection'] = format
+        new_json['destination']['transport_selection'] = transport
+        new_json['destination']['binary_transport_selection'] = binary
+        new_json[format] = destination_to_copy['destination'][format]
+        new_json[transport] = destination_to_copy['destination'][transport]
         if binary is not None:
             new_json[binary] = \
-                destination_to_copy["destination"][binary]
+                destination_to_copy['destination'][binary]
         new_json = json.dumps(new_json)
         return new_json
