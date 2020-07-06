@@ -43,7 +43,7 @@ class DeviceMagic():
     @property
     def group(self):
         from .group import Group
-        return Group(self.session, self.org_id)
+        return Group(self.connector, self.org_id)
 
     @property
     def dispatch(self):

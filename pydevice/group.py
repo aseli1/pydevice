@@ -1,35 +1,41 @@
 class Group():
 
-    def __init__(self, session, org_id):
-        self.r = session
+    def __init__(self, connector, org_id):
+        self.connector = connector
         self.org_id = org_id
-        self.base_url = "https://www.devicemagic.com/organizations/"\
-                        "{0}/groups".format(self.org_id)
+        self.base_url = 'https://www.devicemagic.com/organizations/' \
+                        '{0}/groups'.format(self.org_id)
+        self.headers = {'Content-Type': 'application/json'}
+        self.format = 'json'
 
     def all(self):
-        request = self.r.get(self.base_url + ".json")
-        return request.json()
+        path = self.base_url + '.' + self.format
+        request = self.connector.execute_request(path, 'GET')
+        return request
 
     def create(self, json):
-        headers = {'Content-Type': 'application/json'}
-        request = self.r.post(self.base_url, data=json, headers=headers)
+        path = self.base_url
+        request = self.connector.execute_request(
+            path, 'POST', data=json, headers=self.headers, return_json=False)
         if request.status_code >= 200 and request.status_code < 300:
-            return "Group created"
+            return 'Group created'
         else:
-            return "Failed with status code: {0}".format(request.status_code)
+            return 'Failed with status code: {0}'.format(request.status_code)
 
     def update(self, group_id, json):
-        headers = {'Content-Type': 'application/json'}
-        request = self.r.put(self.base_url
-                             + "/" + str(group_id), data=json, headers=headers)
+        path = self.base_url + '/' + str(group_id)
+        request = self.connector.execute_request(
+            path, 'PUT', data=json, headers=self.headers, return_json=False)
         if request.status_code >= 200 and request.status_code < 300:
-            return "Group updated"
+            return 'Group updated'
         else:
-            return "Failed with status code: {0}".format(request.status_code)
+            return 'Failed with status code: {0}'.format(request.status_code)
 
     def delete(self, group_id):
-        request = self.r.delete(self.base_url + "/" + str(group_id))
+        path = self.base_url + '/' + str(group_id)
+        request = self.connector.execute_request(
+            path, 'DELETE', return_json=False)
         if request.status_code >= 200 and request.status_code < 300:
-            return "Group deleted"
+            return 'Group deleted'
         else:
-            return "Failed with status code: {0}".format(request.status_code)
+            return 'Failed with status code: {0}'.format(request.status_code)
