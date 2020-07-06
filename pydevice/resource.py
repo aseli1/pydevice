@@ -8,24 +8,26 @@ class Resource():
         self.connector = connector
         self.file_path = file_path
         self.base_url = 'https://www.devicemagic.com/api/resources'
+        self.FORMAT = 'json'
         if self.file_path is not None:
             self.content_type = mimetypes.guess_type(self.file_path)
         else:
             self.content_type = None
 
     def all(self):
-        path = self.base_url
+        path = self.base_url + '.' + self.FORMAT
         request = self.connector.execute_request(path, 'GET')
         return request
 
     def download(self, resource_id):
-        path = self.base_url + '/' + str(resource_id)
+        path = self.base_url + '/' + str(resource_id) + '.' + self.FORMAT
         request = self.connector.execute_request(
             path, 'GET', return_json=False)
         return request.content
 
     def details(self, resource_id):
-        path = self.base_url + '/' + str(resource_id) + '/describe'
+        path = self.base_url + '/' + str(resource_id) \
+            + '/describe' + '.' + self.FORMAT
         request = self.connector.execute_request(path, 'GET')
         return request
 
@@ -46,7 +48,7 @@ class Resource():
                              'file': {'file_name': file_name,
                                       'file_data': data,
                                       'content_type': content_type}}}
-        path = self.base_url
+        path = self.base_url + '.' + self.FORMAT
         request = self.connector.execute_request(path, 'POST', data=json)
         return request
 
@@ -60,7 +62,7 @@ class Resource():
                              'file': {'file_name': file_name,
                                       'file_data': data,
                                       'content_type': content_type}}}
-        path = self.base_url + '/' + str(resource_id)
+        path = self.base_url + '/' + str(resource_id) + '.' + self.FORMAT
         request = self.connector.execute_request(path, 'PUT', data=json)
         return request
 
