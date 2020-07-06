@@ -39,7 +39,7 @@ class DeviceMagic():
     @property
     def form(self):
         from .form import Form
-        return Form(self.session, self.org_id)
+        return Form(self.connector, self.org_id)
 
     @property
     def group(self):
@@ -50,3 +50,8 @@ class DeviceMagic():
     def dispatch(self):
         from .dispatch import Dispatch
         return Dispatch(self.session, self.org_id)
+
+    @property
+    def connector(self):
+        from .connector import Connector
+        return Connector(self.session)
