@@ -20,7 +20,7 @@ class Connector(object):
 
     def _get(self, path, return_json=True):
         request = self.r.get(path)
-        return request.json() if return_json else request
+        return request.json() if return_json else request.content
 
     def _post(self, path, data, headers, return_json=True):
         self.r.headers.update(headers)
@@ -40,3 +40,7 @@ class Connector(object):
     def _delete(self, path):
         request = self.r.delete(path)
         return request
+
+    def failed_request_details(self, request):
+        return 'Failed with status code: {0} {1}, headers: {2}'.format(
+            request.status_code, request.reason, request.headers)

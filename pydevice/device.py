@@ -25,7 +25,7 @@ class Device():
         if request.status_code >= 200 and request.status_code < 300:
             return 'Device approved'
         else:
-            return 'Failed with status code: {0}'.format(request.status_code)
+            return self.connector.failed_request_details(request)
 
     def delete(self, device_id):
         path = self.base_url + '/' + str(device_id)
@@ -33,7 +33,7 @@ class Device():
         if request.status_code >= 200 and request.status_code < 300:
             return 'Device deleted'
         else:
-            return 'Failed with status code: {0}'.format(request.status_code)
+            return self.connector.failed_request_details(request)
 
     def update(self, device_id, json):
         path = self.base_url + '/' + str(device_id)
@@ -42,4 +42,4 @@ class Device():
         if request.status_code >= 200 and request.status_code < 300:
             return 'Device updated'
         else:
-            return 'Failed with status code: {0}'.format(request.status_code)
+            return self.connector.failed_request_details(request)

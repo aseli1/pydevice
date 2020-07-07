@@ -20,7 +20,7 @@ class Group():
         if request.status_code >= 200 and request.status_code < 300:
             return 'Group created'
         else:
-            return 'Failed with status code: {0}'.format(request.status_code)
+            return self.connector.failed_request_details(request)
 
     def update(self, group_id, json):
         path = self.base_url + '/' + str(group_id)
@@ -29,7 +29,7 @@ class Group():
         if request.status_code >= 200 and request.status_code < 300:
             return 'Group updated'
         else:
-            return 'Failed with status code: {0}'.format(request.status_code)
+            return self.connector.failed_request_details(request)
 
     def delete(self, group_id):
         path = self.base_url + '/' + str(group_id)
@@ -38,4 +38,4 @@ class Group():
         if request.status_code >= 200 and request.status_code < 300:
             return 'Group deleted'
         else:
-            return 'Failed with status code: {0}'.format(request.status_code)
+            return self.connector.failed_request_details(request)

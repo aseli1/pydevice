@@ -23,7 +23,7 @@ class Resource():
         path = self.base_url + '/' + str(resource_id) + '.' + self.FORMAT
         request = self.connector.execute_request(
             path, 'GET', return_json=False)
-        return request.content
+        return request
 
     def details(self, resource_id):
         path = self.base_url + '/' + str(resource_id) \
@@ -82,4 +82,4 @@ class Resource():
         if request.status_code >= 200 and request.status_code < 300:
             return 'Resource deleted'
         else:
-            return 'Failed with status code: {0}'.format(request.status_code)
+            return self.connector.failed_request_details(request)

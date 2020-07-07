@@ -32,7 +32,7 @@ class Form():
         if request.status_code >= 200 and request.status_code < 300:
             return 'Form deleted'
         else:
-            return 'Failed with status code: {0}'.format(request.status_code)
+            return self.connector.failed_request_details(request)
 
     def new_group(self, form_id, json):
         path = self.base_url + '/' + str(form_id) \
@@ -42,4 +42,4 @@ class Form():
         if request.status_code >= 200 and request.status_code < 300:
             return 'Form group updated'
         else:
-            return 'Failed with status code: {0}'.format(request.status_code)
+            return self.connector.failed_request_details(request)

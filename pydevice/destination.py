@@ -45,7 +45,7 @@ class Destination():
         if request.status_code >= 200 and request.status_code < 300:
             return 'Destination deleted'
         else:
-            return 'Failed with status code: {0}'.format(request.status_code)
+            return self.connector.failed_request_details(request)
 
     def copy(self, destination_id, form_id=None):
         destination_to_copy = self.details(destination_id)
@@ -68,7 +68,7 @@ class Destination():
             del json['destination'][element]['updated_at']
 
     def _format_destination_json(self, destination_to_copy,
-                                  format, transport, binary):
+                                 format, transport, binary):
         new_json = {}
         new_json['destination'] = {}
         new_json['destination']['description'] = \
