@@ -192,7 +192,7 @@ In preference, you can pass the key explicitly:
 >>> from some_file import dispatch_json
 >>> new_brunswick_tab = 'Android_d5c2a9db-7c7e-465b'
 >>> ontario_phone = 'iPhone_8775938_48795749'
->>> service_call = 13434 # Oneshot id
+>>> service_call = 13434 # Dispatch id
 >>> old_dispatch = 11947
 >>>
 >>> dm.dispatch.all() # All outstanding dispatches
@@ -202,7 +202,7 @@ In preference, you can pass the key explicitly:
 >>>
 >>> dm.dispatch.update(new_brunswick, service_call, dispatch_json)
 >>>
->>> dm.dispatch.delete(ontario_phone, oneshot_id=old_dispatch) # Delete a single dispatch
+>>> dm.dispatch.delete(ontario_phone, dispatch_id=old_dispatch) # Delete a single dispatch
 >>>
 >>> dm.dispatch.delete(ontario_phone) # Remove all
 ```
