@@ -1,5 +1,6 @@
 import base64
 import mimetypes
+import json
 
 
 class Resource():
@@ -13,6 +14,7 @@ class Resource():
             self.content_type = mimetypes.guess_type(self.file_path)
         else:
             self.content_type = None
+        self.headers = {'Content-Type': 'application/json'}
 
     def all(self):
         path = self.base_url + '.' + self.FORMAT
@@ -44,12 +46,14 @@ class Resource():
             self._encode_local_file()
         data = file_data or self.encoded_file
         content_type = content_type or self.content_type
-        json = {'resource': {'description': description,
-                             'file': {'file_name': file_name,
-                                      'file_data': data,
-                                      'content_type': content_type}}}
+        payload = {'resource': {'description': description,
+                                'file': {'file_name': file_name,
+                                         'file_data': data,
+                                         'content_type': content_type}}}
+
         path = self.base_url + '.' + self.FORMAT
-        request = self.connector.execute_request(path, 'POST', data=json)
+        request = self.connector.execute_request(
+            path, 'POST', data=json.dumps(payload), headers=self.headers)
         return request
 
     def update(self, resource_id, description,
@@ -58,12 +62,13 @@ class Resource():
             self._encode_local_file()
         data = file_data or self.encoded_file
         content_type = content_type or self.content_type
-        json = {'resource': {'description': description,
-                             'file': {'file_name': file_name,
-                                      'file_data': data,
-                                      'content_type': content_type}}}
+        payload = {'resource': {'description': description,
+                                'file': {'file_name': file_name,
+                                         'file_data': data,
+                                         'content_type': content_type}}}
         path = self.base_url + '/' + str(resource_id) + '.' + self.FORMAT
-        request = self.connector.execute_request(path, 'PUT', data=json)
+        request = self.connector.execute_request(
+            path, 'PUT', data=json.dumps(payload), headers=self.headers)
         return request
 
     def clone(self, resource_id, mimetype, description=None, file_name=None):

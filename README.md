@@ -126,7 +126,7 @@ In preference, you can pass the key explicitly:
 >>> with open('form.json') as json:
 ...     dm.form.create(json.read())
 ...
-'Form created'
+{'type': 'root', 'children': [{'identifier': 'Serial_number'...
 >>>
 >>> dm.form.update(site_survey, form_json)
 >>>
