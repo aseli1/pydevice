@@ -6,7 +6,7 @@ Python interface for the Device Magic API
 PyPi:
 
 ```python
-pip install pydevice
+pip3 install pydevice
 ```
 
 Git:
