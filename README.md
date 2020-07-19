@@ -14,7 +14,7 @@ Git:
 ```python
 git clone https://github.com/aseli1/pydevice.git
 cd pydevice
-python setup.py install
+python3 setup.py install
 ```
 Tested on Python 3.6 -- works on Mac
 
