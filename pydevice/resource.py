@@ -8,7 +8,7 @@ class Resource():
     def __init__(self, connector, file_path):
         self.connector = connector
         self.file_path = file_path
-        self.base_url = 'https://www.devicemagic.com/api/resources'
+        self.base_url = 'https://api.devicemagic.com/api/resources'
         self.FORMAT = 'json'
         if self.file_path is not None:
             self.content_type = mimetypes.guess_type(self.file_path)

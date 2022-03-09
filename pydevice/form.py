@@ -3,7 +3,7 @@ class Form():
     def __init__(self, connector, org_id):
         self.connector = connector
         self.org_id = org_id
-        self.base_url = 'https://www.devicemagic.com/organizations/'\
+        self.base_url = 'https://api.devicemagic.com/organizations/' \
                         '{0}/forms'.format(self.org_id)
         self.headers = {'Content-Type': 'application/json'}
         self.format = 'json'

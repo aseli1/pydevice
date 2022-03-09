@@ -6,7 +6,7 @@ class Destination():
     def __init__(self, connector, form_id):
         self.connector = connector
         self.form_id = form_id
-        self.base_url = 'https://www.devicemagic.com/api/forms/' \
+        self.base_url = 'https://api.devicemagic.com/api/forms/' \
                         '{0}/destinations'.format(self.form_id)
         self.headers = {'Content-Type': 'application/json'}
         self.format = 'json'

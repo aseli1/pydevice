@@ -3,8 +3,8 @@ class Dispatch():
     def __init__(self, connector, org_id):
         self.connector = connector
         self.org_id = org_id
-        self.device_base_url = 'https://www.devicemagic.com/api/v2/devices'
-        self.org_base_url = 'https://www.devicemagic.com/api/v2/organizations'
+        self.device_base_url = 'https://api.devicemagic.com/api/v2/devices'
+        self.org_base_url = 'https://api.devicemagic.com/api/v2/organizations'
         self.headers = {'Content-Type': 'application/json'}
         self.format = 'json'
 

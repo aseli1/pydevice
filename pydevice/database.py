@@ -3,7 +3,7 @@ class Database():
     def __init__(self, connector, id):
         self.connector = connector
         self.id = id
-        self.base_url = 'https://www.devicemagic.com/api/forms' \
+        self.base_url = 'https://api.devicemagic.com/api/forms' \
                         '/{0}/device_magic_database.json'.format(self.id)
 
     def json(self, *args):
