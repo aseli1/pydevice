@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='pydevice',
-    version='0.3.2',
+    version='0.3.3',
     description="Device Magic API Wrapper",
     long_description=long_description,
     long_description_content_type="text/markdown",
